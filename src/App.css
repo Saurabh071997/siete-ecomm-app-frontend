@@ -53,6 +53,13 @@ body {
   flex-wrap: wrap;
 }
 
+.component-head {
+  font-size: var(--txt-225);
+  color: var(--txt-light-secondary);
+  text-align: center;
+  margin-top: 2rem;
+}
+
 @media screen and (max-width: 600px) {
   .page-head {
     font-size: var(--txt-175);

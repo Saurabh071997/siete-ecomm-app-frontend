@@ -6,6 +6,9 @@ import { Footer } from "./components/Footer";
 import { Home } from "./components/Home";
 import { Categories } from "./components/Categories";
 import { ProductDisplay } from "./components/ProductDisplay";
+import { LoginPage } from "./components/LoginPage";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { UserProfile } from "./components/private/UserProfile";
 
 import { useWindowSize } from "./context/useWindowSize";
 
@@ -20,6 +23,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/products" element={<ProductDisplay />} />
+          <Route path="/login" element={<LoginPage />} />
+          <PrivateRoute path="/profile" element={<UserProfile />} />
         </Routes>
       </div>
 
