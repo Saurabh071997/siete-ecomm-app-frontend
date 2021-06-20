@@ -23,3 +23,47 @@ body {
   padding: 0rem;
 }
 
+.align-center {
+  text-align: center;
+}
+
+.toast-class {
+  width: 90%;
+  margin-top: 1rem;
+  background-color: #404040;
+}
+
+.toast-body {
+  background-color: #404040;
+  color: #fafafa;
+}
+
+.page-head {
+  font-size: var(--txt-225);
+  padding: 1rem;
+}
+
+.page-layout {
+  width: 70%;
+  margin: 0rem auto;
+}
+
+.page-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  .page-head {
+    font-size: var(--txt-175);
+  }
+
+  .page-layout {
+    width: auto;
+  }
+
+  .page-container {
+    padding: 0rem;
+    margin: 0rem;
+  }
+}

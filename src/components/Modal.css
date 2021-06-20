@@ -1,0 +1,21 @@
+.modal-div {
+  width: 100%;
+  position: fixed;
+  padding: 0rem;
+  top: 50%;
+  left: 0em;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  margin: 0rem auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.modal-sub-div {
+  position: relative;
+  text-align: center;
+  margin: 0rem auto;
+  padding: 1rem;
+  background-color: #e5e7eb;
+}

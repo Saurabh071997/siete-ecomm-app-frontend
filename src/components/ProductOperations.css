@@ -1,0 +1,67 @@
+@media screen and (max-width:600px){
+    
+  .btn-sort,
+  .btn-filter {
+    font-size: 1.25rem;
+    /* width: 50%; */
+    padding: 0.65rem 0.5rem;
+    background-color: var(--navBg);
+    border: none;
+    outline: none;
+    border-top: 2px solid var(--borderTop);
+    border-bottom: 2px solid var(--borderTop);
+    display: flex;
+    flex: 0 1 50%;
+  }
+
+  .btn-sort {
+    border-right: 2px solid var(--borderTop);
+  }
+
+  .img-sort,
+  .img-filter {
+    height: 1.75rem;
+    width: 1.75rem;
+    position: relative;
+    margin-right: 0.2rem;
+  }
+
+  .dropdown-div {
+    position: relative;
+    top: 0.2em;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--navBg);
+    padding: 1rem 0.5rem;
+  }
+
+  .input-radio,
+  .input-checkbox {
+    margin: 0.25rem 0rem;
+  }
+
+  /* input[type="radio"] {
+    visibility: hidden;
+  } */
+
+  .btn-radio,
+  .btn-checkbox {
+    position: relative;
+    top: 0.2em;
+  }
+
+  .radio-label,
+  .checkbox-label {
+    color: var(--btnLabel);
+    font-size: 1.35rem;
+    position: relative;
+    bottom: 1em;
+  }
+
+  .icon-del {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+
+}
