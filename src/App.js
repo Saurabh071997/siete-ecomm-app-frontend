@@ -9,7 +9,8 @@ import { ProductDisplay } from "./components/ProductDisplay";
 import { LoginPage } from "./components/LoginPage";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { UserProfile } from "./components/private/UserProfile";
-import {Wishlist} from "./components/private/Wishlist";
+import { Wishlist } from "./components/private/Wishlist";
+import { Cart } from "./components/private/Cart";
 import { useWindowSize } from "./context/useWindowSize";
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
           <Route path="/products" element={<ProductDisplay />} />
           <Route path="/login" element={<LoginPage />} />
           <PrivateRoute path="/profile" element={<UserProfile />} />
-          <PrivateRoute path="/wishlist" element={<Wishlist/>} />
+          <PrivateRoute path="/wishlist" element={<Wishlist />} />
+          <PrivateRoute path="/cart" element={<Cart />} />
         </Routes>
       </div>
 

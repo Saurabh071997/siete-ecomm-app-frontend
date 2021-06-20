@@ -23,6 +23,22 @@
   width: 40%;
 }
 
+.btn-counter {
+  margin: 0rem 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.card-counter-num {
+  font-size: 1rem;
+}
+
+.cart-card-counter {
+  display: flex;
+  position: relative;
+  left: -0.5em;
+}
+
 @media screen and (max-width: 600px) {
   .card-horizontal-container {
     width: 95%;
