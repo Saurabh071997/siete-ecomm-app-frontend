@@ -60,6 +60,24 @@ body {
   margin-top: 2rem;
 }
 
+.empty-container {
+  font-size: 2rem;
+  opacity: 0.6;
+  margin: 0rem auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-empty {
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  color: var(--truegray800);
+  cursor: pointer;
+}
+
+
 @media screen and (max-width: 600px) {
   .page-head {
     font-size: var(--txt-175);

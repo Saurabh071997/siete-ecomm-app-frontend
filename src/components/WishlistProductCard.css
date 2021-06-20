@@ -1,0 +1,31 @@
+.card-horizontal-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #a3a3a3;
+  border-radius: 0.25rem;
+}
+
+.card-horizontal-block {
+  display: flex;
+}
+
+.card-horizontal-block-detail {
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 0.25rem;
+  justify-content: space-between;
+}
+
+.card-horizontal-img {
+  width: 40%;
+}
+
+@media screen and (max-width: 600px) {
+  .card-horizontal-container {
+    width: 95%;
+    margin: 0.5rem auto;
+  }
+}
