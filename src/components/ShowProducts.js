@@ -1,17 +1,25 @@
+import { useParams } from "react-router-dom";
+// import { useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { useCart } from "../context/CartProvider";
+// import {ACTIONS} from "../context/reducerFunction";
 
 export function ShowProducts() {
   const {
     state: {
       productList,
-      selectedCategory,
-      selectedSubCategory,
+      // selectedCategory,
+      // selectedSubCategory,
       sortBy,
       showNewOnly,
-      showDiscountOnly
+      showDiscountOnly,
     }
   } = useCart();
+
+  let { categoryId: selectedCategory, subcategoryId: selectedSubCategory } =
+    useParams();
+
+    console.log({selectedCategory, selectedSubCategory})
 
   function getSortedData(productData, sortBy) {
     if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {
@@ -35,10 +43,10 @@ export function ShowProducts() {
   ) {
     return productData
       .filter(({ subcategory: { category } }) =>
-        selectedCategory !== null ? category._id === selectedCategory : true
+        selectedCategory ? category._id === selectedCategory : true
       )
       .filter(({ subcategory: { _id } }) =>
-        selectedSubCategory !== null ? _id === selectedSubCategory : true
+        selectedSubCategory ? _id === selectedSubCategory : true
       )
       .filter(({ newProduct }) => (showNewOnly ? newProduct : true))
       .filter(({ isDiscounted }) => (showDiscountOnly ? isDiscounted : true));
@@ -49,7 +57,7 @@ export function ShowProducts() {
     selectedCategory,
     selectedSubCategory,
     showNewOnly,
-    showDiscountOnly
+    showDiscountOnly,
   });
 
   return (

@@ -1,0 +1,28 @@
+.error-container {
+    font-size: 2rem;
+    opacity: 0.6;
+    margin: 2rem auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.error-txt-md{
+    font-size:6rem;
+    margin:1rem auto;
+    color:var(--truegray900);
+}
+
+.error-txt-sm{
+    font-size:2rem;
+    margin:1rem auto;
+    color:var(--truegray600);
+}
+
+.btn-empty {
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    color: #1E3A8A;
+    cursor: pointer;
+}

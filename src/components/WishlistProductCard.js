@@ -1,13 +1,11 @@
 import "./WishlistProductCard.css";
 import "./ProductCard.css";
 import { useCart } from "../context/CartProvider";
-import { useAuth } from "../context/AuthProvider";
+
 
 export function WishlistProductCard({ product }) {
   const { handleRemoveFromWishlist, handleMoveToCart } = useCart();
-  const {
-    authState: { currentUser }
-  } = useAuth();
+  
   return (
     <div className="card-horizontal-container">
       <div className="card-horizontal-block">
@@ -56,7 +54,6 @@ export function WishlistProductCard({ product }) {
           style={{ backgroundColor: "#F87171" }}
           onClick={() => {
             handleRemoveFromWishlist({
-              userId: currentUser._id,
               productId: product._id
             });
           }}
@@ -68,7 +65,6 @@ export function WishlistProductCard({ product }) {
           style={{ backgroundColor: "#404040" }}
           onClick={() => {
             handleMoveToCart({
-              userId: currentUser._id,
               productId: product._id
             });
           }}

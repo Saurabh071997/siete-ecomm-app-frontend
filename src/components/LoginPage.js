@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import { useAuth } from "../context/AuthProvider";
 
@@ -8,7 +8,9 @@ export function LoginPage() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  let navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -36,12 +38,20 @@ export function LoginPage() {
           </div>
 
           <div className="align-center">
+
+          <div className="page-nav-txt">
+              New User?
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                {" "}
+                <span className="page-nav-link">Create Account </span>{" "}
+              </Link>
+            </div>
+
             <button
               type="button"
               className="btn-login"
               onClick={() => {
                 loginUserWithCredentials(email, password);
-                navigate("/");
               }}
             >
               Login

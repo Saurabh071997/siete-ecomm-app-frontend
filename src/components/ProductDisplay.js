@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ShowProducts } from "./ShowProducts";
 import { useWindowSize } from "../context/useWindowSize";
 import { ShowProductsInDesktop } from "./ShowProductsInDesktop";
@@ -10,6 +11,10 @@ export function ProductDisplay() {
   const {
     state: { isLoading },
   } = useCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return isLoading ? (
     <Loader />

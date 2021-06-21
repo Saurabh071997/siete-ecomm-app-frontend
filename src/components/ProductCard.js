@@ -25,7 +25,7 @@ export function DiscountBadge({ discountVal }) {
 export function ProductCard({ product }) {
   const { handleAddToCart, handleAddToWishlist } = useCart();
   const {
-    authState: { userLoggedIn, currentUser },
+    authState: { accessToken },
   } = useAuth();
 
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -113,9 +113,8 @@ export function ProductCard({ product }) {
             className="card-wishlist-icon wishlist-icon-shift"
             viewBox="0 0 32 29.6"
             onClick={() => {
-              if (userLoggedIn) {
+              if (accessToken) {
                 handleAddToWishlist({
-                  userId: currentUser._id,
                   productId: product._id,
                 });
               } else {
@@ -154,9 +153,8 @@ export function ProductCard({ product }) {
           <button
             className="card-block-btn-style"
             onClick={() => {
-              if (userLoggedIn) {
+              if (accessToken) {
                 handleAddToCart({
-                  userId: currentUser._id,
                   productId: product._id,
                 });
               } else {

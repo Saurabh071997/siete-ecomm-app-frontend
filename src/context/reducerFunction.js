@@ -63,7 +63,7 @@ export const ACTIONS = {
               : [...state.itemsInCart, { __product, quantity: 1 }]
         };
   
-        localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
+        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "REMOVE_FROM_CART":
@@ -73,7 +73,7 @@ export const ACTIONS = {
             ({ __product }) => __product !== action.payload.__product
           )
         };
-        localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
+        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "INCREMENT_QUANTITY":
@@ -85,7 +85,7 @@ export const ACTIONS = {
               : item
           )
         };
-        localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
+        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "DECREMENT_QUANTITY":
@@ -97,7 +97,7 @@ export const ACTIONS = {
               : item
           )
         };
-        localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
+        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "SET_WISHLIST":
@@ -118,7 +118,7 @@ export const ACTIONS = {
                 ]
         };
   
-        localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
+        // localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
         return state;
   
       case "REMOVE_FROM_WISHLIST":
@@ -128,7 +128,7 @@ export const ACTIONS = {
             ({ __product }) => __product !== action.payload.__product
           )
         };
-        localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
+        // localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
         return state;
   
       case "SORT":

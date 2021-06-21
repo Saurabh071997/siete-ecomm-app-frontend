@@ -1,7 +1,7 @@
 import "./ProductCard.css";
 import "./WishlistProductCard.css";
 import { useCart } from "../context/CartProvider";
-import { useAuth } from "../context/AuthProvider";
+// import { useAuth } from "../context/AuthProvider";
 
 export function CartProductCard({ product, quantity }) {
   const {
@@ -10,9 +10,6 @@ export function CartProductCard({ product, quantity }) {
     handleIncrementQuantity,
     handleDecrementQuantity
   } = useCart();
-  const {
-    authState: { currentUser }
-  } = useAuth();
 
   return (
     <div
@@ -55,12 +52,12 @@ export function CartProductCard({ product, quantity }) {
               onClick={() => {
                 if (quantity === 1) {
                   handleRemoveFromCart({
-                    userId: currentUser._id,
+    
                     productId: product._id
                   });
                 } else {
                   handleDecrementQuantity({
-                    userId: currentUser._id,
+    
                     productId: product._id
                   });
                 }
@@ -74,7 +71,7 @@ export function CartProductCard({ product, quantity }) {
               className="btn-counter"
               onClick={() => {
                 handleIncrementQuantity({
-                  userId: currentUser._id,
+  
                   productId: product._id
                 });
               }}
@@ -91,7 +88,6 @@ export function CartProductCard({ product, quantity }) {
           style={{ backgroundColor: "#F87171" }}
           onClick={() => {
             handleRemoveFromCart({
-              userId: currentUser._id,
               productId: product._id
             });
           }}
@@ -103,7 +99,6 @@ export function CartProductCard({ product, quantity }) {
           style={{ backgroundColor: "#404040" }}
           onClick={() => {
             handleMoveToWishlist({
-              userId: currentUser._id,
               productId: product._id
             });
           }}

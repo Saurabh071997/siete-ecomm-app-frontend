@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 0rem;
+
 }
 
 .profile-img {
@@ -49,22 +50,38 @@ hr {
 
 .btn-logout {
   font-size: var(--txt-15);
-  color: var(--colorLogo);
-  margin: 0.5rem auto;
+  /* color: var(--colorLogo); */
+  margin: 2rem auto;
   cursor: pointer;
-  background: transparent;
+  /* background: transparent; */
   border: none;
   outline: none;
+  cursor: pointer;
+  padding:0.25rem 0.75rem;
+  color:whitesmoke;
+  background-color: var(--colorLogo);
+  width:200px;
+}
+
+.link-edit{
+  font-size:1.15rem;
+  color:#0284C7;
+  margin:0.5rem auto;
+}
+
+.link-edit span:hover{
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+.txt-empty{
+  color:#0284C7;
 }
 
 @media screen and (max-width: 600px) {
-  .user-img {
-    height: 120px;
-    width: 120px;
-  }
-
+  
   .profile-name {
-    font-size: var(--txt-15);
+    font-size: var(--txt-175);
   }
 
   hr {

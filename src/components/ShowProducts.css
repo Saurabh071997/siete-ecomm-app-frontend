@@ -38,11 +38,6 @@ li {
   margin-right: 0.25rem;
 }
 
-.mob-flex-align {
-  flex: 0 1 250px;
-  margin: 0.5rem 0.25rem;
-}
-
 .sidenav-item {
   font-size: 1.25rem;
   padding: 0.25rem 0rem 0.25rem 1rem;

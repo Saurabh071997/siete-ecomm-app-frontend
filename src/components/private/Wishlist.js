@@ -1,22 +1,27 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartProvider";
-import { ACTIONS } from "../../context/reducerFunction";
+// import { ACTIONS } from "../../context/reducerFunction";
 import { WishlistProductCard } from "../WishlistProductCard";
 import { Loader } from "../Loader";
 
 export function Wishlist() {
   const {
     state: { productList, itemsInWishlist, isLoading },
-    dispatch
+    getUserWishlist
   } = useCart();
 
-  useEffect(() => {
-    const wishlist = JSON.parse(localStorage?.getItem("wishlist"));
+  // useEffect(() => {
+  //   const wishlist = JSON.parse(localStorage?.getItem("wishlist"));
 
-    wishlist?.length > 0 &&
-      dispatch({ TYPE: ACTIONS.SET_WISHLIST, payload: { wishlist } });
-  }, [dispatch]);
+  //   wishlist?.length > 0 &&
+  //     dispatch({ TYPE: ACTIONS.SET_WISHLIST, payload: { wishlist } });
+  // }, [dispatch]);
+
+  useEffect(()=>{
+    getUserWishlist();
+    // eslint-disable-next-line
+  },[])
 
   return isLoading ? (
     <Loader />

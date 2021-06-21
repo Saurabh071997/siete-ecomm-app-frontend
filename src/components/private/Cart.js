@@ -3,20 +3,25 @@ import { Link } from "react-router-dom";
 import "./Cart.css"
 import { CartProductCard } from "../CartProductCard";
 import { useCart } from "../../context/CartProvider";
-import { ACTIONS } from "../../context/reducerFunction";
+// import { ACTIONS } from "../../context/reducerFunction";
 import { Loader } from "../Loader";
 
 export function Cart() {
   const {
     state: { productList, itemsInCart, isLoading },
-    dispatch
+    getUserCart
   } = useCart();
 
-  useEffect(() => {
-    const userCart = JSON.parse(localStorage?.getItem("cart"));
-    userCart?.length > 0 &&
-      dispatch({ TYPE: ACTIONS.SET_CART, payload: { cart: userCart } });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const userCart = JSON.parse(localStorage?.getItem("cart"));
+  //   userCart?.length > 0 &&
+  //     dispatch({ TYPE: ACTIONS.SET_CART, payload: { cart: userCart } });
+  // }, [dispatch]);
+
+  useEffect(()=>{
+    getUserCart();
+    // eslint-disable-next-line
+  },[])
 
   let payableAmount = itemsInCart?.reduce(
     (prev, curr) => {

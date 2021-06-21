@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import './Home.css'
+import "./Home.css";
 import { Carousel } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartProvider";
-import { ACTIONS } from "../context/reducerFunction";
+// import { ACTIONS } from "../context/reducerFunction";
 import { Loader } from "./Loader";
 
 import banner_img_1 from "../images/banner1.jpg";
@@ -22,7 +22,14 @@ export function ControlledCarousel() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} className="carousels">
+    <Carousel
+      nextLabel={null}
+      prevLabel={null}
+      interval={3000}
+      activeIndex={index}
+      onSelect={handleSelect}
+      className="carousels"
+    >
       <Carousel.Item>
         <img
           className="d-block w-100 h-carousel"
@@ -50,8 +57,7 @@ export function ControlledCarousel() {
 
 export function CategoriesBlock() {
   const {
-    state: { categoryList },
-    dispatch
+    state: { categoryList }
   } = useCart();
 
   const navigate = useNavigate();
@@ -66,8 +72,9 @@ export function CategoriesBlock() {
               className="block-cat-item"
               key={_id}
               onClick={() => {
-                dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
-                navigate("/products");
+                // dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
+                // navigate("/products");
+                navigate(`/products/${_id}`)
               }}
             >
               <img src={imgUrl} alt="img_cat" className="cat-img" />
@@ -103,8 +110,13 @@ export function Banners() {
 }
 
 export function Home() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
-    state: { isLoading }
+    state: { isLoading },
   } = useCart();
   return isLoading ? (
     <Loader />

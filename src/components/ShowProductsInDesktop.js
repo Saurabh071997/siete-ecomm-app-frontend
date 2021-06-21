@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ShowProducts.css";
 import { ShowProducts } from "./ShowProducts";
 import { ACTIONS } from "../context/reducerFunction";
@@ -9,6 +9,9 @@ export function ShowProductsInDesktop() {
     state: { sortBy, showNewOnly, showDiscountOnly, categoryList },
     dispatch
   } = useCart();
+
+  const navigate = useNavigate();
+
   return (
     <div className="body-container">
       <div className="sidenav">
@@ -19,7 +22,8 @@ export function ShowProductsInDesktop() {
               <li
                 key={_id}
                 onClick={() => {
-                  dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
+                  // dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
+                  navigate(`/products/${_id}`)
                 }}
               >
                 <div className="sidenav-item">{name}</div>
