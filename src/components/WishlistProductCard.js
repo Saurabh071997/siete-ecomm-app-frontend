@@ -30,7 +30,7 @@ export function WishlistProductCard({ product }) {
               className="card-block-detail-info "
               style={{ margin: "0.35rem 0rem" }}
             >
-              Rs.
+              &#8377;
               {product.isDiscounted
                 ? product.effectivePrice
                 : product.actualPrice}
@@ -40,7 +40,7 @@ export function WishlistProductCard({ product }) {
                   style={{ opacity: "0.6", marginLeft: "0.5rem" }}
                 >
                   {" "}
-                  Rs. {product.actualPrice}
+                  &#8377; {product.actualPrice}
                 </span>
               ) : null}
             </div>

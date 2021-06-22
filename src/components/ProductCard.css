@@ -1,3 +1,12 @@
+.card-show-block{
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  overflow: hidden;
+  padding-bottom: 1rem;
+  box-shadow: 2px 2px 4px var(--truegray400);
+}
+
 .card-block-detail-title {
   font-size: var(--txt-15);
   margin: 0rem;
@@ -62,5 +71,9 @@
 
   .card-block-btn-style {
     font-size: 0.85rem;
+  }
+
+  .tilt-position{
+    right:-1.5em
   }
 }

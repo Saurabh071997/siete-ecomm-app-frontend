@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ProductCard.css";
 import "./Modal.css";
 import { useCart } from "../context/CartProvider";
@@ -16,7 +16,7 @@ export function NewBadge() {
 
 export function DiscountBadge({ discountVal }) {
   return (
-    <div className="card-block-badge-tilt" style={{ fontSize: "0.65rem" }}>
+    <div className="card-block-badge-tilt" style={{ fontSize: "0.75rem" }}>
       {discountVal}% Off
     </div>
   );
@@ -27,6 +27,8 @@ export function ProductCard({ product }) {
   const {
     authState: { accessToken },
   } = useAuth();
+
+  const navigate = useNavigate();
 
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -90,7 +92,15 @@ export function ProductCard({ product }) {
   return (
     <div className="card-block mob-flex-align">
       {showLoginModal && <LoginModal />}
-      <img src={product.imgUrl} alt="img" className="card-block-img" />
+      <img
+        src={product.imgUrl}
+        alt="img"
+        className="card-block-img"
+        style={{cursor:"pointer"}}
+        onClick={() => {
+          navigate(`/product/view/${product._id}`);
+        }}
+      />
 
       {product.newProduct ? <NewBadge /> : null}
 
@@ -133,7 +143,7 @@ export function ProductCard({ product }) {
             {product.name}
           </div>
           <div className="card-block-detail-info card-block-detail-info-style">
-            Rs.
+            &#8377;
             {product.isDiscounted
               ? product.effectivePrice
               : product.actualPrice}
@@ -143,7 +153,7 @@ export function ProductCard({ product }) {
                 style={{ opacity: "0.6", marginLeft: "0.5rem" }}
               >
                 {" "}
-                Rs. {product.actualPrice}
+                &#8377; {product.actualPrice}
               </span>
             ) : null}
           </div>

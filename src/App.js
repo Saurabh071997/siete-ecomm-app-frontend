@@ -16,6 +16,7 @@ import { EditProfile } from "./components/private/EditProfile";
 import { Wishlist } from "./components/private/Wishlist";
 import { Cart } from "./components/private/Cart";
 import { ErrorPage } from "./components/ErroPage";
+import {ProductPage} from "./components/ProductPage"
 import { useWindowSize } from "./context/useWindowSize";
 import { useToast } from "./context/ToastProvider";
 
@@ -56,6 +57,7 @@ function App() {
             path="/products/:categoryId/:subcategoryId"
             element={<ProductDisplay />}
           />
+          <Route path="/product/view/:productId" element={<ProductPage/>}/>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/*" element={<ErrorPage />} />
