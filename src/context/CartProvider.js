@@ -8,11 +8,7 @@ import { useNavigate } from "react-router-dom";
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  // const {
-  //   // eslint-disable-next-line
-  //   authState: { currentUser },
-  // } = useAuth();
-
+  
   const { toastDispatch } = useToast();
   const navigate = useNavigate();
 
@@ -79,7 +75,6 @@ export function CartProvider({ children }) {
     })();
   }, [navigate]);
 
-
   async function getUserCart() {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
@@ -123,7 +118,7 @@ export function CartProvider({ children }) {
     }
   }
 
-  async function handleAddToCart({ productId }) {
+  async function handleAddToCart({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       const response = await axios.post(
@@ -139,10 +134,12 @@ export function CartProvider({ children }) {
           payload: { __product: productId },
         });
 
-        toastDispatch({
-          TYPE: "TOGGLE_TOAST",
-          payload: { toggle: true, message: "Added to Cart " },
-        });
+        if (showToast) {
+          toastDispatch({
+            TYPE: "TOGGLE_TOAST",
+            payload: { toggle: true, message: "Added to Cart " },
+          });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -151,7 +148,7 @@ export function CartProvider({ children }) {
     }
   }
 
-  async function handleAddToWishlist({ productId }) {
+  async function handleAddToWishlist({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.post(
@@ -167,10 +164,12 @@ export function CartProvider({ children }) {
           payload: { __product: productId },
         });
 
-        toastDispatch({
-          TYPE: "TOGGLE_TOAST",
-          payload: { toggle: true, message: "Added to Wishlist " },
-        });
+        if (showToast) {
+          toastDispatch({
+            TYPE: "TOGGLE_TOAST",
+            payload: { toggle: true, message: "Added to Wishlist " },
+          });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -179,7 +178,7 @@ export function CartProvider({ children }) {
     }
   }
 
-  async function handleRemoveFromCart({ productId }) {
+  async function handleRemoveFromCart({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.delete(
@@ -197,10 +196,12 @@ export function CartProvider({ children }) {
           payload: { __product: productId },
         });
 
-        toastDispatch({
-          TYPE: "TOGGLE_TOAST",
-          payload: { toggle: true, message: "Removed from Cart " },
-        });
+        if (showToast) {
+          toastDispatch({
+            TYPE: "TOGGLE_TOAST",
+            payload: { toggle: true, message: "Removed from Cart " },
+          });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -209,7 +210,7 @@ export function CartProvider({ children }) {
     }
   }
 
-  async function handleRemoveFromWishlist({ productId }) {
+  async function handleRemoveFromWishlist({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.delete(
@@ -226,10 +227,12 @@ export function CartProvider({ children }) {
           payload: { __product: productId },
         });
 
-        toastDispatch({
-          TYPE: "TOGGLE_TOAST",
-          payload: { toggle: true, message: "Removed from Wishlist " },
-        });
+        if (showToast) {
+          toastDispatch({
+            TYPE: "TOGGLE_TOAST",
+            payload: { toggle: true, message: "Removed from Wishlist " },
+          });
+        }
       }
     } catch (err) {
       console.error(err);
@@ -241,8 +244,8 @@ export function CartProvider({ children }) {
   async function handleMoveToCart({ productId }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      handleAddToCart({ productId });
-      handleRemoveFromWishlist({ productId });
+      handleAddToCart({ productId, showToast:false });
+      handleRemoveFromWishlist({ productId , showToast:false});
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Cart " },
@@ -257,8 +260,8 @@ export function CartProvider({ children }) {
   async function handleMoveToWishlist({ productId }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      handleAddToWishlist({ productId });
-      handleRemoveFromCart({ productId });
+      handleAddToWishlist({ productId ,showToast:false});
+      handleRemoveFromCart({ productId, showToast:false });
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Wishlist " },
@@ -343,40 +346,3 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
-
-  // useEffect(() => {
-  //   async function fillCartAndWishlist() {
-  //     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
-  //     try {
-  //       let response = await axios.get(
-  //         `https://siete-backend.herokuapp.com/cart/${currentUser?._id}`
-  //       );
-  //       if (response.status === 200) {
-  //         const {
-  //           data: { data }
-  //         } = response;
-  //         const { products: cart } = data;
-  //         localStorage?.setItem("cart", JSON.stringify(cart));
-  //         dispatch({ TYPE: ACTIONS.SET_CART, payload: { cart } });
-  //       }
-
-  //       response = await axios.get(
-  //         `https://siete-backend.herokuapp.com/wishlist/${currentUser?._id}`
-  //       );
-  //       if (response.status === 200) {
-  //         const {
-  //           data: { data }
-  //         } = response;
-  //         const { products: wishlist } = data;
-  //         localStorage?.setItem("wishlist", JSON.stringify(wishlist));
-  //         dispatch({ TYPE: ACTIONS.SET_WISHLIST, payload: { wishlist } });
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     } finally {
-  //       dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
-  //     }
-  //   }
-
-  //   currentUser !== null && fillCartAndWishlist();
-  // }, [currentUser]);

@@ -6,6 +6,7 @@ import { useCart } from "../../context/CartProvider";
 import phone from "../../images/phone-icon.svg";
 import mail_icon from "../../images/mail.svg";
 import profile_img from "../../images/profile.jpg";
+import location_icon from "../../images/location.svg";
 import { Loader } from "../Loader";
 
 export function UserProfile() {
@@ -62,6 +63,14 @@ export function UserProfile() {
           <span className="txt-empty"> -- </span>
         )}
       </div>
+
+      <div className="profile-location">
+        <Link to="/address" style={{ textDecoration: "none"}}>
+          <img src={location_icon} className="profile-info-img" alt="img" />
+          My addresses
+        </Link>
+      </div>
+
       <div className="profile-mail">
         <img src={mail_icon} className="profile-info-img" alt="img" />
         {currentUser?.email}

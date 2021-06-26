@@ -18,29 +18,29 @@ export function CartProductCard({ product, quantity }) {
     >
       <div className="card-horizontal-block">
         <img
-          src={product.imgUrl}
+          src={product?.imgUrl}
           className="card-horizontal-img"
           alt="card-img"
         />
 
         <div className="card-horizontal-block-detail">
           <div>
-            <div className="card-block-detail-title">{product.brandName}</div>
+            <div className="card-block-detail-title">{product?.brandName}</div>
 
-            <div className="card-block-detail-txt ">{product.name}</div>
+            <div className="card-block-detail-txt ">{product?.name}</div>
 
             <div className="card-block-detail-info ">
               &#8377;{" "}
-              {product.isDiscounted
-                ? product.effectivePrice
-                : product.actualPrice}
-              {product.isDiscounted ? (
+              {product?.isDiscounted
+                ? product?.effectivePrice
+                : product?.actualPrice}
+              {product?.isDiscounted ? (
                 <span
                   className="txt-line-through"
                   style={{ opacity: "0.6", marginLeft: "0.5rem" }}
                 >
                   {" "}
-                  &#8377; {product.actualPrice}
+                  &#8377; {product?.actualPrice}
                 </span>
               ) : null}
             </div>
@@ -52,13 +52,12 @@ export function CartProductCard({ product, quantity }) {
               onClick={() => {
                 if (quantity === 1) {
                   handleRemoveFromCart({
-    
-                    productId: product._id
+                    productId: product?._id,
+                    showToast:true
                   });
                 } else {
                   handleDecrementQuantity({
-    
-                    productId: product._id
+                    productId: product?._id
                   });
                 }
               }}
@@ -71,8 +70,7 @@ export function CartProductCard({ product, quantity }) {
               className="btn-counter"
               onClick={() => {
                 handleIncrementQuantity({
-  
-                  productId: product._id
+                  productId: product?._id
                 });
               }}
             >
@@ -88,7 +86,8 @@ export function CartProductCard({ product, quantity }) {
           style={{ backgroundColor: "#F87171" }}
           onClick={() => {
             handleRemoveFromCart({
-              productId: product._id
+              productId: product?._id,
+              showToast:true
             });
           }}
         >
@@ -99,7 +98,7 @@ export function CartProductCard({ product, quantity }) {
           style={{ backgroundColor: "#404040" }}
           onClick={() => {
             handleMoveToWishlist({
-              productId: product._id
+              productId: product?._id
             });
           }}
         >

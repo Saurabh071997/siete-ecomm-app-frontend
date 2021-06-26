@@ -1,7 +1,6 @@
 import './Categories.css'
 import {useEffect} from 'react';
 import { useCart } from "../context/CartProvider";
-// import { ACTIONS } from "../context/reducerFunction";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "./Loader";
 
@@ -21,22 +20,17 @@ export function Categories() {
     <div className="page-layout">
       <div className="page-head">Categories</div>
       <div className="page-container">
-        {subCategoryList.map(({ _id, name, imgUrl, category }) => {
+        {subCategoryList?.map(({ _id, name, imgUrl, category }) => {
           return (
             <div
               key={_id}
               className="category-card"
               onClick={() => {
-                // dispatch({
-                //   TYPE: ACTIONS.SELECT_SUB_CATEGORY,
-                //   payload: { _id, categoryId: category._id }
-                // });
-                // navigate("/products");
-                navigate(`/products/${category._id}/${_id}`)
+                navigate(`/products/${category?._id}/${_id}`)
               }}
             >
               <div className="category-card-txt">
-                <div className="category-card-txt-info">{category.name}</div>
+                <div className="category-card-txt-info">{category?.name}</div>
                 <div className="category-card-txt-det">{name} </div>
               </div>
 

@@ -61,13 +61,14 @@ export function AuthProvider({ children }) {
   const [authState, setAuthState] = useState({
     currentUser: null,
     accessToken: savedToken,
+    userAddressList: [],
   });
 
   const { toastDispatch } = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
-    authState?.accessToken &&
+    // authState?.accessToken &&
       setupAuthExceptionHandler(logoutUser, navigate, toastDispatch);
     // eslint-disable-next-line
   }, []);
@@ -150,7 +151,6 @@ export function AuthProvider({ children }) {
 
   async function getUserDetails() {
     try {
-
       let response = await axios.get(
         `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/user/details`
       );
@@ -170,7 +170,6 @@ export function AuthProvider({ children }) {
 
   async function updateUserProfile(firstname, lastname, contact) {
     try {
-
       let response = await axios.post(
         `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/user/details`,
         {
@@ -190,7 +189,70 @@ export function AuthProvider({ children }) {
     } catch (err) {
       // handleError(err);
       // console.log("now in catch")
-      console.error(err)
+      console.error(err);
+    }
+  }
+
+  async function getUserAddressDetails() {
+    try {
+      console.log("address detail called")
+      let response = await axios.get(
+        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/address/users`
+      );
+
+      if (response.status === 200) {
+        let {
+          data: { data },
+        } = response;
+
+        let { addresslist } = data;
+        setAuthState((authState) => ({
+          ...authState,
+          userAddressList: addresslist,
+        }));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function handleUserAddressUpdate({ addressObj, action }) {
+    try {
+      let response = await axios.post(
+        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/address/users`,
+        {
+          addressObj,
+          action,
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        let {
+          data: { data },
+        } = response;
+        let { addresslist } = data;
+        setAuthState((authState) => ({
+          ...authState,
+          userAddressList: addresslist,
+        }));
+
+        let toastMsg;
+        if(action==="ADD"){
+          toastMsg= `Address added successfully!!`
+        }else if(action === "REMOVE"){
+          toastMsg = `Address removed successfully`
+        }else if(action === "SET_DEFAULT"){
+          toastMsg = `Address Selected`
+        }
+
+        toastDispatch({
+          TYPE: "TOGGLE_TOAST",
+          payload: { toggle: true, message: toastMsg },
+        });
+        navigate("/address");
+      }
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -201,6 +263,7 @@ export function AuthProvider({ children }) {
       ...authState,
       accessToken: null,
       currentUser: null,
+      userAddressList: [],
     }));
 
     setupAuthHeaderForServiceCalls(null);
@@ -214,7 +277,9 @@ export function AuthProvider({ children }) {
         logoutUser,
         handleUserSignUp,
         getUserDetails,
-        updateUserProfile
+        updateUserProfile,
+        handleUserAddressUpdate,
+        getUserAddressDetails,
       }}
     >
       {children}

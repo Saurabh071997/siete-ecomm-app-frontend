@@ -12,12 +12,12 @@ export function DiscountNewBadge({ discountVal }) {
 export function ProductShowCard({ product }) {
   return (
     <div className="card-show-block">
-      <img src={product.imgUrl} alt="img" className="card-block-img" />
+      <img src={product?.imgUrl} alt="img" className="card-block-img" />
 
-      {product.newProduct ? <NewBadge /> : null}
+      {product?.newProduct ? <NewBadge /> : null}
 
-      {product.isDiscounted ? (
-        <DiscountNewBadge discountVal={product.discount} />
+      {product?.isDiscounted ? (
+        <DiscountNewBadge discountVal={product?.discount} />
       ) : null}
 
       <div
@@ -31,22 +31,22 @@ export function ProductShowCard({ product }) {
         }}
       >
         <div style={{marginBottom:"1rem"}}>
-          <div className="card-block-detail-title">{product.brandName}</div>
+          <div className="card-block-detail-title">{product?.brandName}</div>
           <div className="card-block-detail-txt card-block-detail-txt-style">
-            {product.name}
+            {product?.name}
           </div>
           <div className="card-block-detail-info card-block-detail-info-style">
             &#8377;
-            {product.isDiscounted
-              ? product.effectivePrice
-              : product.actualPrice}
-            {product.isDiscounted ? (
+            {product?.isDiscounted
+              ? product?.effectivePrice
+              : product?.actualPrice}
+            {product?.isDiscounted ? (
               <span
                 className="txt-line-through"
                 style={{ opacity: "0.6", marginLeft: "0.5rem" }}
               >
                 {" "}
-                &#8377; {product.actualPrice}
+                &#8377; {product?.actualPrice}
               </span>
             ) : null}
           </div>

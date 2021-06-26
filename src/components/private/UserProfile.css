@@ -28,7 +28,8 @@ hr {
 }
 
 .profile-contact,
-.profile-mail {
+.profile-mail,
+.profile-location {
   font-size: var(--txt-125);
   color: var(--txt-light-secondary);
   margin: 0rem auto 0.5rem auto;
@@ -38,6 +39,12 @@ hr {
   overflow: hidden;
   white-space: no-wrap;
   text-overflow: ellipsis;
+}
+
+.profile-location:hover{
+  color:#0284C7;
+  cursor:pointer;
+  text-decoration: underline;
 }
 
 .profile-info-img {

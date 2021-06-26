@@ -11,12 +11,6 @@ export function Wishlist() {
     getUserWishlist
   } = useCart();
 
-  // useEffect(() => {
-  //   const wishlist = JSON.parse(localStorage?.getItem("wishlist"));
-
-  //   wishlist?.length > 0 &&
-  //     dispatch({ TYPE: ACTIONS.SET_WISHLIST, payload: { wishlist } });
-  // }, [dispatch]);
 
   useEffect(()=>{
     getUserWishlist();
@@ -28,11 +22,11 @@ export function Wishlist() {
   ) : (
     <div className="page-layout">
       <div className="page-head">Wishlist</div>
-      {itemsInWishlist.length > 0 ? (
+      {itemsInWishlist?.length > 0 ? (
         <div className="page-container">
-          {itemsInWishlist.map(({ __product }) => {
-            let product = productList.find(({ _id }) => _id === __product);
-            return <WishlistProductCard key={product._id} product={product} />;
+          {itemsInWishlist?.map(({ __product }) => {
+            let product = productList?.find(({ _id }) => _id === __product);
+            return <WishlistProductCard key={__product} product={product} />;
           })}
         </div>
       ) : (

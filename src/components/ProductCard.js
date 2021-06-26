@@ -93,19 +93,19 @@ export function ProductCard({ product }) {
     <div className="card-block mob-flex-align">
       {showLoginModal && <LoginModal />}
       <img
-        src={product.imgUrl}
+        src={product?.imgUrl}
         alt="img"
         className="card-block-img"
         style={{cursor:"pointer"}}
         onClick={() => {
-          navigate(`/product/view/${product._id}`);
+          navigate(`/product/view/${product?._id}`);
         }}
       />
 
-      {product.newProduct ? <NewBadge /> : null}
+      {product?.newProduct ? <NewBadge /> : null}
 
-      {product.isDiscounted ? (
-        <DiscountBadge discountVal={product.discount} />
+      {product?.isDiscounted ? (
+        <DiscountBadge discountVal={product?.discount} />
       ) : null}
 
       <div
@@ -125,7 +125,8 @@ export function ProductCard({ product }) {
             onClick={() => {
               if (accessToken) {
                 handleAddToWishlist({
-                  productId: product._id,
+                  productId: product?._id,
+                  showToast:true
                 });
               } else {
                 setShowLoginModal(true);
@@ -138,22 +139,22 @@ export function ProductCard({ product }) {
             />
           </svg>
 
-          <div className="card-block-detail-title">{product.brandName}</div>
+          <div className="card-block-detail-title">{product?.brandName}</div>
           <div className="card-block-detail-txt card-block-detail-txt-style">
-            {product.name}
+            {product?.name}
           </div>
           <div className="card-block-detail-info card-block-detail-info-style">
             &#8377;
-            {product.isDiscounted
-              ? product.effectivePrice
-              : product.actualPrice}
-            {product.isDiscounted ? (
+            {product?.isDiscounted
+              ? product?.effectivePrice
+              : product?.actualPrice}
+            {product?.isDiscounted ? (
               <span
                 className="txt-line-through"
                 style={{ opacity: "0.6", marginLeft: "0.5rem" }}
               >
                 {" "}
-                &#8377; {product.actualPrice}
+                &#8377; {product?.actualPrice}
               </span>
             ) : null}
           </div>
@@ -165,7 +166,8 @@ export function ProductCard({ product }) {
             onClick={() => {
               if (accessToken) {
                 handleAddToCart({
-                  productId: product._id,
+                  productId: product?._id,
+                  showToast:true
                 });
               } else {
                 setShowLoginModal(true);

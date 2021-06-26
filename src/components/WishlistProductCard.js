@@ -10,20 +10,20 @@ export function WishlistProductCard({ product }) {
     <div className="card-horizontal-container">
       <div className="card-horizontal-block">
         <img
-          src={product.imgUrl}
+          src={product?.imgUrl}
           className="card-horizontal-img"
           alt="card-img"
         />
 
         <div className="card-horizontal-block-detail">
           <div style={{ margin: "1rem 0rem" }}>
-            <div className="card-block-detail-title">{product.brandName}</div>
+            <div className="card-block-detail-title">{product?.brandName}</div>
 
             <div
               className="card-block-detail-txt "
               style={{ margin: "0.35rem 0rem" }}
             >
-              {product.name}
+              {product?.name}
             </div>
 
             <div
@@ -31,16 +31,16 @@ export function WishlistProductCard({ product }) {
               style={{ margin: "0.35rem 0rem" }}
             >
               &#8377;
-              {product.isDiscounted
-                ? product.effectivePrice
-                : product.actualPrice}
-              {product.isDiscounted ? (
+              {product?.isDiscounted
+                ? product?.effectivePrice
+                : product?.actualPrice}
+              {product?.isDiscounted ? (
                 <span
                   className="txt-line-through"
                   style={{ opacity: "0.6", marginLeft: "0.5rem" }}
                 >
                   {" "}
-                  &#8377; {product.actualPrice}
+                  &#8377; {product?.actualPrice}
                 </span>
               ) : null}
             </div>
@@ -54,7 +54,8 @@ export function WishlistProductCard({ product }) {
           style={{ backgroundColor: "#F87171" }}
           onClick={() => {
             handleRemoveFromWishlist({
-              productId: product._id
+              productId: product?._id,
+              showToast:true
             });
           }}
         >
@@ -65,7 +66,7 @@ export function WishlistProductCard({ product }) {
           style={{ backgroundColor: "#404040" }}
           onClick={() => {
             handleMoveToCart({
-              productId: product._id
+              productId: product?._id
             });
           }}
         >

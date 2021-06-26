@@ -39,7 +39,7 @@ export function LoginPage() {
 
           <div className="align-center">
 
-          <div className="page-nav-txt">
+            <div className="page-nav-txt">
               New User?
               <Link to="/signup" style={{ textDecoration: "none" }}>
                 {" "}

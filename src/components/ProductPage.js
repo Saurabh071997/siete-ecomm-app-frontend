@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ProductPage.css";
 import "./Modal.css";
 import { useCart } from "../context/CartProvider";
@@ -18,6 +18,10 @@ export function ProductPage() {
   const {
     authState: { accessToken },
   } = useAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const product = productList?.find(({ _id }) => _id === productId);
 
@@ -179,7 +183,8 @@ export function ProductPage() {
                 onClick={() => {
                   if (accessToken) {
                     handleAddToCart({
-                      productId: product._id,
+                      productId: product?._id,
+                      showToast:true
                     });
                   } else {
                     setShowLoginModal(true);
@@ -192,7 +197,8 @@ export function ProductPage() {
                 onClick={() => {
                   if (accessToken) {
                     handleAddToWishlist({
-                      productId: product._id,
+                      productId: product?._id,
+                      showToast:true
                     });
                   } else {
                     setShowLoginModal(true);
