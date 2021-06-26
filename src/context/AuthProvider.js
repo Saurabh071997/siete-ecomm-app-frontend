@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
   async function loginUserWithCredentials(email, password) {
     try {
       let response = await axios.post(
-        "https://siete-ecomm-app-backend.saurabhkamboj.repl.co/login",
+        "https://siete-backend.herokuapp.com/login",
         {
           usermail: email,
           userpassword: password,
@@ -119,7 +119,7 @@ export function AuthProvider({ children }) {
   async function handleUserSignUp(email, password) {
     try {
       let response = await axios.post(
-        "https://siete-ecomm-app-backend.saurabhkamboj.repl.co/signup",
+        "https://siete-backend.herokuapp.com/signup",
         {
           email: email,
           password: password,
@@ -152,7 +152,7 @@ export function AuthProvider({ children }) {
   async function getUserDetails() {
     try {
       let response = await axios.get(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/user/details`
+        `https://siete-backend.herokuapp.com/user/details`
       );
 
       if (response.status === 200) {
@@ -171,7 +171,7 @@ export function AuthProvider({ children }) {
   async function updateUserProfile(firstname, lastname, contact) {
     try {
       let response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/user/details`,
+        `https://siete-backend.herokuapp.com/user/details`,
         {
           firstname,
           lastname,
@@ -197,7 +197,7 @@ export function AuthProvider({ children }) {
     try {
       console.log("address detail called")
       let response = await axios.get(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/address/users`
+        `https://siete-backend.herokuapp.com/address/users`
       );
 
       if (response.status === 200) {
@@ -219,7 +219,7 @@ export function AuthProvider({ children }) {
   async function handleUserAddressUpdate({ addressObj, action }) {
     try {
       let response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/address/users`,
+        `https://siete-backend.herokuapp.com/address/users`,
         {
           addressObj,
           action,

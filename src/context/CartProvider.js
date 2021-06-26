@@ -31,7 +31,7 @@ export function CartProvider({ children }) {
       dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
       try {
         let response = await axios.get(
-          "https://siete-ecomm-app-backend.saurabhkamboj.repl.co/products"
+          "https://siete-backend.herokuapp.com/products"
         );
         if (response.status === 200) {
           const {
@@ -41,7 +41,7 @@ export function CartProvider({ children }) {
         }
 
         response = await axios.get(
-          "https://siete-ecomm-app-backend.saurabhkamboj.repl.co/categories"
+          "https://siete-backend.herokuapp.com/categories"
         );
         if (response.status === 200) {
           const {
@@ -54,7 +54,7 @@ export function CartProvider({ children }) {
         }
 
         response = await axios.get(
-          "https://siete-ecomm-app-backend.saurabhkamboj.repl.co/categories/subcategory"
+          "https://siete-backend.herokuapp.com/categories/subcategory"
         );
         if (response.status === 200) {
           const {
@@ -79,7 +79,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.get(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/cart/users`
+        `https://siete-backend.herokuapp.com/cart/users`
       );
       if (response.status === 200) {
         const {
@@ -100,7 +100,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.get(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/wishlist/users`
+        `https://siete-backend.herokuapp.com/wishlist/users`
       );
 
       if (response.status === 200) {
@@ -122,7 +122,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       const response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/cart/users`,
+        `https://siete-backend.herokuapp.com/cart/users`,
         {
           __product: productId,
           action: "INCREMENT",
@@ -152,7 +152,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/wishlist/users`,
+        `https://siete-backend.herokuapp.com/wishlist/users`,
         {
           __product: productId,
         }
@@ -182,7 +182,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.delete(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/cart/users`,
+        `https://siete-backend.herokuapp.com/cart/users`,
         {
           data: {
             __product: productId,
@@ -214,7 +214,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.delete(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/wishlist/users`,
+        `https://siete-backend.herokuapp.com/wishlist/users`,
         {
           data: {
             __product: productId,
@@ -277,7 +277,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       const response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/cart/users`,
+        `https://siete-backend.herokuapp.com/cart/users`,
         {
           __product: productId,
           action: "INCREMENT",
@@ -301,7 +301,7 @@ export function CartProvider({ children }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       const response = await axios.post(
-        `https://siete-ecomm-app-backend.saurabhkamboj.repl.co/cart/users`,
+        `https://siete-backend.herokuapp.com/cart/users`,
         {
           __product: productId,
           action: "DECREMENT",
