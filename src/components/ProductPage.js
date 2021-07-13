@@ -53,7 +53,7 @@ export function ProductPage() {
                   color: "white",
                   backgroundColor: "black",
                   fontSize: "1.15rem",
-                  padding: "0.5rem 1rem",
+                  padding: "0.25rem 3rem",
                   margin: "0rem auto",
                   border: "none",
                   outline: "none",

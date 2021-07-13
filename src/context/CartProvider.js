@@ -1,14 +1,13 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { reducerFunction, ACTIONS } from "./reducerFunction";
-// import { useAuth } from "./AuthProvider";
 import { useToast } from "./ToastProvider";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "./config";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  
   const { toastDispatch } = useToast();
   const navigate = useNavigate();
 
@@ -30,9 +29,7 @@ export function CartProvider({ children }) {
     (async function () {
       dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
       try {
-        let response = await axios.get(
-          "https://siete-backend.herokuapp.com/products"
-        );
+        let response = await axios.get(`${API_URL}/products`);
         if (response.status === 200) {
           const {
             data: { data: products },
@@ -40,9 +37,7 @@ export function CartProvider({ children }) {
           dispatch({ TYPE: ACTIONS.SET_PRODUCT_LIST, payload: { products } });
         }
 
-        response = await axios.get(
-          "https://siete-backend.herokuapp.com/categories"
-        );
+        response = await axios.get(`${API_URL}/categories`);
         if (response.status === 200) {
           const {
             data: { data: categories },
@@ -53,9 +48,7 @@ export function CartProvider({ children }) {
           });
         }
 
-        response = await axios.get(
-          "https://siete-backend.herokuapp.com/categories/subcategory"
-        );
+        response = await axios.get(`${API_URL}/categories/subcategory`);
         if (response.status === 200) {
           const {
             data: { data: subcategories },
@@ -78,15 +71,13 @@ export function CartProvider({ children }) {
   async function getUserCart() {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      let response = await axios.get(
-        `https://siete-backend.herokuapp.com/cart/users`
-      );
+      let response = await axios.get(`${API_URL}/cart/users`);
       if (response.status === 200) {
         const {
           data: { data },
         } = response;
         const { products: cart } = data;
-        // localStorage?.setItem("cart", JSON.stringify(cart));
+
         dispatch({ TYPE: ACTIONS.SET_CART, payload: { cart } });
       }
     } catch (err) {
@@ -99,16 +90,14 @@ export function CartProvider({ children }) {
   async function getUserWishlist() {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      let response = await axios.get(
-        `https://siete-backend.herokuapp.com/wishlist/users`
-      );
+      let response = await axios.get(`${API_URL}/wishlist/users`);
 
       if (response.status === 200) {
         const {
           data: { data },
         } = response;
         const { products: wishlist } = data;
-        // localStorage?.setItem("wishlist", JSON.stringify(wishlist));
+
         dispatch({ TYPE: ACTIONS.SET_WISHLIST, payload: { wishlist } });
       }
     } catch (err) {
@@ -121,13 +110,10 @@ export function CartProvider({ children }) {
   async function handleAddToCart({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      const response = await axios.post(
-        `https://siete-backend.herokuapp.com/cart/users`,
-        {
-          __product: productId,
-          action: "INCREMENT",
-        }
-      );
+      const response = await axios.post(`${API_URL}/cart/users`, {
+        __product: productId,
+        action: "INCREMENT",
+      });
       if (response.status === 201 || response.status === 200) {
         dispatch({
           TYPE: ACTIONS.ADD_TO_CART,
@@ -151,12 +137,9 @@ export function CartProvider({ children }) {
   async function handleAddToWishlist({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      let response = await axios.post(
-        `https://siete-backend.herokuapp.com/wishlist/users`,
-        {
-          __product: productId,
-        }
-      );
+      let response = await axios.post(`${API_URL}/wishlist/users`, {
+        __product: productId,
+      });
 
       if (response.status === 201 || response.status === 200) {
         dispatch({
@@ -181,14 +164,11 @@ export function CartProvider({ children }) {
   async function handleRemoveFromCart({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      let response = await axios.delete(
-        `https://siete-backend.herokuapp.com/cart/users`,
-        {
-          data: {
-            __product: productId,
-          },
-        }
-      );
+      let response = await axios.delete(`${API_URL}/cart/users`, {
+        data: {
+          __product: productId,
+        },
+      });
 
       if (response.status === 200) {
         dispatch({
@@ -213,14 +193,11 @@ export function CartProvider({ children }) {
   async function handleRemoveFromWishlist({ productId, showToast }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      let response = await axios.delete(
-        `https://siete-backend.herokuapp.com/wishlist/users`,
-        {
-          data: {
-            __product: productId,
-          },
-        }
-      );
+      let response = await axios.delete(`${API_URL}/wishlist/users`, {
+        data: {
+          __product: productId,
+        },
+      });
       if (response.status === 200) {
         dispatch({
           TYPE: ACTIONS.REMOVE_FROM_WISHLIST,
@@ -244,8 +221,8 @@ export function CartProvider({ children }) {
   async function handleMoveToCart({ productId }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      handleAddToCart({ productId, showToast:false });
-      handleRemoveFromWishlist({ productId , showToast:false});
+      handleAddToCart({ productId, showToast: false });
+      handleRemoveFromWishlist({ productId, showToast: false });
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Cart " },
@@ -260,8 +237,8 @@ export function CartProvider({ children }) {
   async function handleMoveToWishlist({ productId }) {
     dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      handleAddToWishlist({ productId ,showToast:false});
-      handleRemoveFromCart({ productId, showToast:false });
+      handleAddToWishlist({ productId, showToast: false });
+      handleRemoveFromCart({ productId, showToast: false });
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Wishlist " },
@@ -274,15 +251,11 @@ export function CartProvider({ children }) {
   }
 
   async function handleIncrementQuantity({ productId }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      const response = await axios.post(
-        `https://siete-backend.herokuapp.com/cart/users`,
-        {
-          __product: productId,
-          action: "INCREMENT",
-        }
-      );
+      const response = await axios.post(`${API_URL}/cart/users`, {
+        __product: productId,
+        action: "INCREMENT",
+      });
 
       if (response.status === 200) {
         dispatch({
@@ -292,21 +265,15 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleDecrementQuantity({ productId }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
-      const response = await axios.post(
-        `https://siete-backend.herokuapp.com/cart/users`,
-        {
-          __product: productId,
-          action: "DECREMENT",
-        }
-      );
+      const response = await axios.post(`${API_URL}/cart/users`, {
+        __product: productId,
+        action: "DECREMENT",
+      });
 
       if (response.status === 200) {
         dispatch({
@@ -316,7 +283,20 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
+    }
+  }
+
+  async function handleOrderConfirm() {
+    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+    try {
+      const response = await axios.post(`${API_URL}/cart/users/order/confirm`);
+      if (response.status === 200) {
+        dispatch({ TYPE: ACTIONS.ORDER_CONFIRM });
+        navigate('/orderconfirm')
+      }
+    } catch (err) {
+      console.error(err);
+    }finally{
       dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
@@ -336,6 +316,7 @@ export function CartProvider({ children }) {
         handleMoveToWishlist,
         handleIncrementQuantity,
         handleDecrementQuantity,
+        handleOrderConfirm
       }}
     >
       {children}

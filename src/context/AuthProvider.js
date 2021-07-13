@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "./ToastProvider";
+import {API_URL} from './config'
 
 export const AuthContext = createContext();
 
@@ -21,7 +22,6 @@ function setupAuthExceptionHandler(logoutUser, navigate, toastDispatch) {
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
-        // console.log("line 25 exceptionhandler 401 ");
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
           payload: { toggle: true, message: "Unauthorised Access" },
@@ -29,7 +29,6 @@ function setupAuthExceptionHandler(logoutUser, navigate, toastDispatch) {
         logoutUser();
         navigate("/login");
       } else if (error?.response?.status === FORBIDDEN) {
-        // console.log("line 33 exceptionhandler 403 ");
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
           payload: { toggle: true, message: "User Session Expired" },
@@ -37,7 +36,6 @@ function setupAuthExceptionHandler(logoutUser, navigate, toastDispatch) {
         logoutUser();
         navigate("/login");
       } else {
-        // console.log("line 41 exceptionhandler other error ");
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
           payload: { toggle: true, message: "NetWork Failure" },
@@ -76,7 +74,7 @@ export function AuthProvider({ children }) {
   async function loginUserWithCredentials(email, password) {
     try {
       let response = await axios.post(
-        "https://siete-backend.herokuapp.com/login",
+        `${API_URL}/login`,
         {
           usermail: email,
           userpassword: password,
@@ -119,7 +117,7 @@ export function AuthProvider({ children }) {
   async function handleUserSignUp(email, password) {
     try {
       let response = await axios.post(
-        "https://siete-backend.herokuapp.com/signup",
+        `${API_URL}/signup`,
         {
           email: email,
           password: password,
@@ -152,7 +150,7 @@ export function AuthProvider({ children }) {
   async function getUserDetails() {
     try {
       let response = await axios.get(
-        `https://siete-backend.herokuapp.com/user/details`
+        `${API_URL}/user/details`
       );
 
       if (response.status === 200) {
@@ -171,7 +169,7 @@ export function AuthProvider({ children }) {
   async function updateUserProfile(firstname, lastname, contact) {
     try {
       let response = await axios.post(
-        `https://siete-backend.herokuapp.com/user/details`,
+        `${API_URL}/user/details`,
         {
           firstname,
           lastname,
@@ -197,7 +195,7 @@ export function AuthProvider({ children }) {
     try {
       console.log("address detail called")
       let response = await axios.get(
-        `https://siete-backend.herokuapp.com/address/users`
+        `${API_URL}/address/users`
       );
 
       if (response.status === 200) {
@@ -219,7 +217,7 @@ export function AuthProvider({ children }) {
   async function handleUserAddressUpdate({ addressObj, action }) {
     try {
       let response = await axios.post(
-        `https://siete-backend.herokuapp.com/address/users`,
+        `${API_URL}/address/users`,
         {
           addressObj,
           action,

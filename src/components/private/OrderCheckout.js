@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import "./OrderCheckout.css";
-import "../Modal.css";
 import { useAuth } from "../../context/AuthProvider";
 import { useCart } from "../../context/CartProvider";
 import cod from "../../images/cash.svg";
-import cross from "../../images/close_icon.svg";
 
 export function OrderCheckout() {
   const {
     authState: { currentUser, userAddressList },
     getUserDetails,
-    getUserAddressDetails,
+    getUserAddressDetails
   } = useAuth();
 
   const {
     state: { itemsInCart, productList },
     getUserCart,
+    handleOrderConfirm
   } = useCart();
 
   const [orderState, setOrderState] = useState({
@@ -26,7 +25,7 @@ export function OrderCheckout() {
     paymentSelected: false,
   });
 
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,73 +61,9 @@ export function OrderCheckout() {
     !currentUser?.contact ||
     !displayAddress;
 
-  function OrderModal() {
-    return (
-      <div className="modal-div">
-        <div className="modal-sub-div">
-          <div
-            style={{
-              color: "black",
-              fontSize: "1.5rem",
-              padding: "0.5rem",
-              margin: "0rem auto",
-              width: "80%",
-            }}
-          >
-            Currently we're under maintenance. Sorry for the inconvenience !!{" "}
-            <br />
-            <br />
-            We'll get back to you soon. Till then shop more !!!
-          </div>
-          <Link to="/categories">
-            <div style={{ textAlign: "center" }}>
-              <button
-                style={{
-                  color: "white",
-                  backgroundColor: "#2563EB",
-                  fontSize: "1.15rem",
-                  padding: "0.5rem 1rem",
-                  margin: "0rem auto",
-                  border: "none",
-                  outline: "none",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  setShowModal(false);
-                }}
-              >
-                Continue shopping
-              </button>
-            </div>
-          </Link>
-          <button
-            style={{
-              position: "absolute",
-              right: "0.5em",
-              top: "0.5em",
-              border: "none",
-              outline: "none",
-              cursor: "pointer",
-            }}
-            onClick={() => setShowModal(false)}
-          >
-            <img
-              src={cross}
-              alt="img"
-              style={{
-                height: "1rem",
-                width: "1rem",
-              }}
-            />
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="page-section">
-      {showModal && <OrderModal />}
+      {/* {showModal && <OrderModal />} */}
       <div className="component-head">Order Confirmation</div>
 
       <div
@@ -382,7 +317,7 @@ export function OrderCheckout() {
               : "btn-place-order btn-disabled"
           }
           onClick={() => {
-            setShowModal(true);
+            handleOrderConfirm()
           }}
         >
           Place Order

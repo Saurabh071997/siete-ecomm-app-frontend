@@ -12,11 +12,11 @@ export const ACTIONS = {
     REMOVE_FROM_WISHLIST: "REMOVE_FROM_WISHLIST",
     INCREMENT_QUANTITY: "INCREMENT_QUANTITY",
     DECREMENT_QUANTITY: "DECREMENT_QUANTITY",
+    ORDER_CONFIRM:"ORDER_CONFIRM",
     SORT: "SORT",
     TOGGLE_NEW: "TOGGLE_NEW",
     TOGGLE_DISCOUNT: "TOGGLE_DISCOUNT",
     TOGGLE_LOADER: "TOGGLE_LOADER",
-    // TOGGLE_TOAST: "TOGGLE_TOAST"
   };
   
   export function reducerFunction(state, action) {
@@ -62,8 +62,6 @@ export const ACTIONS = {
                 )
               : [...state.itemsInCart, { __product, quantity: 1 }]
         };
-  
-        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "REMOVE_FROM_CART":
@@ -73,7 +71,6 @@ export const ACTIONS = {
             ({ __product }) => __product !== action.payload.__product
           )
         };
-        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "INCREMENT_QUANTITY":
@@ -85,7 +82,6 @@ export const ACTIONS = {
               : item
           )
         };
-        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
   
       case "DECREMENT_QUANTITY":
@@ -97,9 +93,11 @@ export const ACTIONS = {
               : item
           )
         };
-        // localStorage?.setItem("cart", JSON.stringify(state.itemsInCart));
         return state;
-  
+
+      case "ORDER_CONFIRM":
+        return {...state, itemsInCart: []}
+
       case "SET_WISHLIST":
         const { wishlist } = action.payload;
         return { ...state, itemsInWishlist: wishlist };
@@ -117,8 +115,6 @@ export const ACTIONS = {
                   { __product: action.payload.__product }
                 ]
         };
-  
-        // localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
         return state;
   
       case "REMOVE_FROM_WISHLIST":
@@ -128,7 +124,6 @@ export const ACTIONS = {
             ({ __product }) => __product !== action.payload.__product
           )
         };
-        // localStorage?.setItem("wishlist", JSON.stringify(state.itemsInWishlist));
         return state;
   
       case "SORT":
@@ -142,13 +137,6 @@ export const ACTIONS = {
   
       case "TOGGLE_LOADER":
         return { ...state, isLoading: action.payload.toggle };
-  
-      // case "TOGGLE_TOAST":
-      //   return {
-      //     ...state,
-      //     toastActive: action.payload.toggle,
-      //     toastMessage: action.payload.message
-      //   };
   
       default:
         return state;

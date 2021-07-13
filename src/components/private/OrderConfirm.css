@@ -1,0 +1,36 @@
+
+.confirm-container{
+    display: flex;
+    flex-direction: column;
+    margin:3rem auto;
+    max-width: 500px;
+}
+
+.confirm-img{
+    height:5rem;
+    width:5rem;
+    margin:1rem auto;
+}
+
+.confirm-txt-main{
+    font-size: var(--txt-175);
+    margin:0.15rem auto;
+    color:#22C55E;
+    text-align: center;
+}
+
+.confirm-txt-sub{
+    font-size: var(--txt-15);
+    margin:0.15 auto;
+    text-align: center;
+}
+
+.btn-nav{
+    padding:0.35rem 2rem;
+    font-size: var(--txt-125);
+    background-color: #22C55E;
+    color:whitesmoke;
+    border-radius: 0.25rem;
+    border:none;
+    outline: none;
+}

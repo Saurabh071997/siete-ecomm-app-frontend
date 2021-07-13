@@ -18,6 +18,7 @@ import { AddressAddPage } from "./components/private/AddressAddPage";
 import { Wishlist } from "./components/private/Wishlist";
 import { Cart } from "./components/private/Cart";
 import { OrderCheckout } from "./components/private/OrderCheckout";
+import { OrderConfirm } from "./components/private/OrderConfirm";
 import { ErrorPage } from "./components/ErroPage";
 import { ProductPage } from "./components/ProductPage";
 import { useWindowSize } from "./context/useWindowSize";
@@ -54,7 +55,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Categories />} />
-          {/* <Route path="/products" element={<ProductDisplay />} /> */}
           <Route path="/products/:categoryId" element={<ProductDisplay />} />
           <Route
             path="/products/:categoryId/:subcategoryId"
@@ -71,6 +71,7 @@ function App() {
           <PrivateRoute path="/wishlist" element={<Wishlist />} />
           <PrivateRoute path="/cart" element={<Cart />} />
           <PrivateRoute path="/cart/checkout" element={<OrderCheckout />} />
+          <PrivateRoute path="/orderconfirm" element={<OrderConfirm />} />
         </Routes>
       </div>
 

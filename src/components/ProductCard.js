@@ -5,6 +5,7 @@ import "./Modal.css";
 import { useCart } from "../context/CartProvider";
 import { useAuth } from "../context/AuthProvider";
 import cross from "../images/close_icon.svg";
+import wish_icon from "../images/wish_red.svg";
 
 export function NewBadge() {
   return (
@@ -23,7 +24,12 @@ export function DiscountBadge({ discountVal }) {
 }
 
 export function ProductCard({ product }) {
-  const { handleAddToCart, handleAddToWishlist } = useCart();
+  const {
+    state: { itemsInWishlist },
+    handleAddToCart,
+    handleAddToWishlist,
+    handleRemoveFromWishlist,
+  } = useCart();
   const {
     authState: { accessToken },
   } = useAuth();
@@ -53,7 +59,7 @@ export function ProductCard({ product }) {
                   color: "white",
                   backgroundColor: "black",
                   fontSize: "1.15rem",
-                  padding: "0.5rem 1rem",
+                  padding: "0.25rem 3rem",
                   margin: "0rem auto",
                   border: "none",
                   outline: "none",
@@ -96,7 +102,7 @@ export function ProductCard({ product }) {
         src={product?.imgUrl}
         alt="img"
         className="card-block-img"
-        style={{cursor:"pointer"}}
+        style={{ cursor: "pointer" }}
         onClick={() => {
           navigate(`/product/view/${product?._id}`);
         }}
@@ -119,25 +125,42 @@ export function ProductCard({ product }) {
         }}
       >
         <div>
-          <svg
-            className="card-wishlist-icon wishlist-icon-shift"
-            viewBox="0 0 32 29.6"
-            onClick={() => {
-              if (accessToken) {
-                handleAddToWishlist({
+          {itemsInWishlist?.find(
+            ({ __product }) => __product === product?._id
+          ) && accessToken ? (
+            <img
+              src={wish_icon}
+              alt="img"
+              className="card-wishlist-icon wishlist-icon-shift"
+              style={{height:'1.5rem', width:"1.5rem"}}
+              onClick={() =>
+                handleRemoveFromWishlist({
                   productId: product?._id,
-                  showToast:true
-                });
-              } else {
-                setShowLoginModal(true);
+                  showToast: true,
+                })
               }
-            }}
-          >
-            <path
-              d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
             />
-          </svg>
+          ) : (
+            <svg
+              className="card-wishlist-icon wishlist-icon-shift"
+              viewBox="0 0 32 29.6"
+              onClick={() => {
+                if (accessToken) {
+                  handleAddToWishlist({
+                    productId: product?._id,
+                    showToast: true,
+                  });
+                } else {
+                  setShowLoginModal(true);
+                }
+              }}
+            >
+              <path
+                d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+              />
+            </svg>
+          )}
 
           <div className="card-block-detail-title">{product?.brandName}</div>
           <div className="card-block-detail-txt card-block-detail-txt-style">
@@ -167,7 +190,7 @@ export function ProductCard({ product }) {
               if (accessToken) {
                 handleAddToCart({
                   productId: product?._id,
-                  showToast:true
+                  showToast: true,
                 });
               } else {
                 setShowLoginModal(true);
