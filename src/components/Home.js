@@ -72,8 +72,6 @@ export function CategoriesBlock() {
               className="block-cat-item"
               key={_id}
               onClick={() => {
-                // dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
-                // navigate("/products");
                 navigate(`/products/${_id}`)
               }}
             >

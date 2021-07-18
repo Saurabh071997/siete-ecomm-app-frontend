@@ -6,14 +6,14 @@
 .nav-mob-top {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
   background-color: white;
   box-shadow: 0px 2px 4px var(--bg-nav);
 }
 
 .nav-mob-logo {
   font-family: inherit;
-  font-size: var(--txt-25);
+  font-size: var(--txt-225);
   color: var(--colorLogo);
   padding-left: 0.5rem;
   flex: 1 1 auto;
@@ -38,8 +38,8 @@
 }
 
 .nav-icon-img {
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 @media screen and (max-width: 600px) {

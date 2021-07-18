@@ -18,7 +18,7 @@
 .home-banner-txt {
   position: absolute;
   bottom: 1em;
-  font-size: 8rem;
+  font-size: 7rem;
   color: white;
   line-height: 1.05;
   opacity: 0.8;
@@ -66,8 +66,8 @@
 }
 
 .cat-img {
-  width: 10rem;
-  height: 10rem;
+  width: 6.5rem;
+  height: 6.5rem;
   border-radius: 50%;
   margin: 0rem auto;
 }
