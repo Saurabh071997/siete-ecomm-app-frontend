@@ -40,58 +40,62 @@ export function ProductCard({ product }) {
 
   function LoginModal() {
     return (
-      <div className="modal-div">
-        <div className="modal-sub-div">
-          <div
-            style={{
-              color: "black",
-              fontSize: "1.5rem",
-              padding: "0.5rem",
-              margin: "0rem auto",
-            }}
-          >
-            Login to continue with this action
-          </div>
-          <Link to="/login">
-            <div style={{ textAlign: "center" }}>
+      <>
+        <div className="overlay">
+          <div className="modal-div">
+            <div className="modal-sub-div">
+              <div
+                style={{
+                  color: "black",
+                  fontSize: "1.5rem",
+                  padding: "0.5rem",
+                  margin: "0rem auto",
+                }}
+              >
+                Login to continue with this action
+              </div>
+              <Link to="/login">
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    style={{
+                      color: "white",
+                      backgroundColor: "black",
+                      fontSize: "1.15rem",
+                      padding: "0.25rem 3rem",
+                      margin: "0rem auto",
+                      border: "none",
+                      outline: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Login
+                  </button>
+                </div>
+              </Link>
               <button
                 style={{
-                  color: "white",
-                  backgroundColor: "black",
-                  fontSize: "1.15rem",
-                  padding: "0.25rem 3rem",
-                  margin: "0rem auto",
+                  position: "absolute",
+                  right: "0.5em",
+                  top: "0.5em",
                   border: "none",
                   outline: "none",
                   cursor: "pointer",
                 }}
+                onClick={() => setShowLoginModal(false)}
               >
-                Login
+                <img
+                  src={cross}
+                  alt="img"
+                  style={{
+                    height: "1rem",
+                    width: "1rem",
+                  }}
+                />
               </button>
             </div>
-          </Link>
-          <button
-            style={{
-              position: "absolute",
-              right: "0.5em",
-              top: "0.5em",
-              border: "none",
-              outline: "none",
-              cursor: "pointer",
-            }}
-            onClick={() => setShowLoginModal(false)}
-          >
-            <img
-              src={cross}
-              alt="img"
-              style={{
-                height: "1rem",
-                width: "1rem",
-              }}
-            />
-          </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -132,7 +136,7 @@ export function ProductCard({ product }) {
               src={wish_icon}
               alt="img"
               className="card-wishlist-icon wishlist-icon-shift"
-              style={{height:'1.5rem', width:"1.5rem"}}
+              style={{ height: "1.5rem", width: "1.5rem" }}
               onClick={() =>
                 handleRemoveFromWishlist({
                   productId: product?._id,

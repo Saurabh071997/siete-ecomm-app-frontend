@@ -34,58 +34,62 @@ export function ProductPage() {
 
   function LoginModal() {
     return (
-      <div className="modal-div">
-        <div className="modal-sub-div">
-          <div
-            style={{
-              color: "black",
-              fontSize: "1.5rem",
-              padding: "0.5rem",
-              margin: "0rem auto",
-            }}
-          >
-            Login to continue with this action
-          </div>
-          <Link to="/login">
-            <div style={{ textAlign: "center" }}>
+      <>
+        <div className="overlay">
+          <div className="modal-div">
+            <div className="modal-sub-div">
+              <div
+                style={{
+                  color: "black",
+                  fontSize: "1.5rem",
+                  padding: "0.5rem",
+                  margin: "0rem auto",
+                }}
+              >
+                Login to continue with this action
+              </div>
+              <Link to="/login">
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    style={{
+                      color: "white",
+                      backgroundColor: "black",
+                      fontSize: "1.15rem",
+                      padding: "0.25rem 3rem",
+                      margin: "0rem auto",
+                      border: "none",
+                      outline: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Login
+                  </button>
+                </div>
+              </Link>
               <button
                 style={{
-                  color: "white",
-                  backgroundColor: "black",
-                  fontSize: "1.15rem",
-                  padding: "0.25rem 3rem",
-                  margin: "0rem auto",
+                  position: "absolute",
+                  right: "0.5em",
+                  top: "0.5em",
                   border: "none",
                   outline: "none",
                   cursor: "pointer",
                 }}
+                onClick={() => setShowLoginModal(false)}
               >
-                Login
+                <img
+                  src={cross}
+                  alt="img"
+                  style={{
+                    height: "1rem",
+                    width: "1rem",
+                  }}
+                />
               </button>
             </div>
-          </Link>
-          <button
-            style={{
-              position: "absolute",
-              right: "0.5em",
-              top: "0.5em",
-              border: "none",
-              outline: "none",
-              cursor: "pointer",
-            }}
-            onClick={() => setShowLoginModal(false)}
-          >
-            <img
-              src={cross}
-              alt="img"
-              style={{
-                height: "1rem",
-                width: "1rem",
-              }}
-            />
-          </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -184,7 +188,7 @@ export function ProductPage() {
                   if (accessToken) {
                     handleAddToCart({
                       productId: product?._id,
-                      showToast:true
+                      showToast: true,
                     });
                   } else {
                     setShowLoginModal(true);
@@ -198,7 +202,7 @@ export function ProductPage() {
                   if (accessToken) {
                     handleAddToWishlist({
                       productId: product?._id,
-                      showToast:true
+                      showToast: true,
                     });
                   } else {
                     setShowLoginModal(true);
@@ -223,11 +227,16 @@ export function ProductPage() {
                 productCategory === currentCategory &&
                 productItem?._id !== product?._id
               ) {
-                return <div key={productItem?._id} className="width270">
-                    <Link to ={`/product/view/${productItem?._id}`} style={{textDecoration:"none"}}>
-                        <ProductShowCard product={productItem} />
+                return (
+                  <div key={productItem?._id} className="width270">
+                    <Link
+                      to={`/product/view/${productItem?._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <ProductShowCard product={productItem} />
                     </Link>
-                </div>
+                  </div>
+                );
               }
 
               return null;

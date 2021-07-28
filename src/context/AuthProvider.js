@@ -11,7 +11,6 @@ function setupAuthHeaderForServiceCalls(token) {
     delete axios.defaults.headers.common["Authorization"];
     return (axios.defaults.headers.common["Authorization"] = `Bearer ${token}`);
   }
-  // console.log("deleting token now");
   delete axios.defaults.headers.common["Authorization"];
 }
 
@@ -35,7 +34,7 @@ function setupAuthExceptionHandler(logoutUser, navigate, toastDispatch) {
         });
         logoutUser();
         navigate("/login");
-      } else {
+      } else if(error?.response?.status === 500) {
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
           payload: { toggle: true, message: "NetWork Failure" },
@@ -60,6 +59,7 @@ export function AuthProvider({ children }) {
     currentUser: null,
     accessToken: savedToken,
     userAddressList: [],
+    authLoader:false
   });
 
   const { toastDispatch } = useToast();
@@ -72,6 +72,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function loginUserWithCredentials(email, password) {
+    setAuthState(authState => ({...authState, authLoader:true}))
     try {
       let response = await axios.post(
         `${API_URL}/login`,
@@ -87,15 +88,12 @@ export function AuthProvider({ children }) {
         } = response;
 
         setupAuthHeaderForServiceCalls(accessToken);
-        // setupAuthExceptionHandler(logoutUser, navigate, toastDispatch)
 
         setAuthState((authState) => ({
           ...authState,
           currentUser: loggedInUser,
           accessToken,
         }));
-        // console.log("login success");
-        // console.log({accessToken, loggedInUser})
 
         localStorage?.setItem("accessToken", JSON.stringify({ accessToken }));
 
@@ -111,10 +109,13 @@ export function AuthProvider({ children }) {
         console.error(err);
         // navigate('/error');
       }
+    }finally{
+      setAuthState(authState => ({...authState, authLoader:false}))
     }
   }
 
   async function handleUserSignUp(email, password) {
+    setAuthState(authState => ({...authState, authLoader:true}))
     try {
       let response = await axios.post(
         `${API_URL}/signup`,
@@ -125,12 +126,23 @@ export function AuthProvider({ children }) {
       );
 
       if (response.status === 201) {
+
+        let {data:{newUser, accessToken}} = response;
+
+        setupAuthHeaderForServiceCalls(accessToken);
+
+        setAuthState((authState) => ({
+          ...authState,
+          currentUser: newUser,
+          accessToken,
+        }));
+
+        localStorage?.setItem("accessToken", JSON.stringify({ accessToken }));
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
           payload: { toggle: true, message: "Account Created Successfully" },
-        });
-        // console.log(response);
-        navigate("/login");
+        });;
+        navigate("/");
       }
     } catch (err) {
       // console.log("in signup catch")
@@ -144,6 +156,8 @@ export function AuthProvider({ children }) {
         console.error(err);
         // navigate('/error');
       }
+    }finally{
+      setAuthState(authState => ({...authState, authLoader:false}))
     }
   }
 
@@ -262,6 +276,7 @@ export function AuthProvider({ children }) {
       accessToken: null,
       currentUser: null,
       userAddressList: [],
+      authLoader:false
     }));
 
     setupAuthHeaderForServiceCalls(null);

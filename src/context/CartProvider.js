@@ -108,7 +108,6 @@ export function CartProvider({ children }) {
   }
 
   async function handleAddToCart({ productId, showToast }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       const response = await axios.post(`${API_URL}/cart/users`, {
         __product: productId,
@@ -129,13 +128,10 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleAddToWishlist({ productId, showToast }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
     try {
       let response = await axios.post(`${API_URL}/wishlist/users`, {
         __product: productId,
@@ -156,13 +152,11 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleRemoveFromCart({ productId, showToast }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+
     try {
       let response = await axios.delete(`${API_URL}/cart/users`, {
         data: {
@@ -185,13 +179,11 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleRemoveFromWishlist({ productId, showToast }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+
     try {
       let response = await axios.delete(`${API_URL}/wishlist/users`, {
         data: {
@@ -213,13 +205,11 @@ export function CartProvider({ children }) {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleMoveToCart({ productId }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+
     try {
       handleAddToCart({ productId, showToast: false });
       handleRemoveFromWishlist({ productId, showToast: false });
@@ -229,13 +219,11 @@ export function CartProvider({ children }) {
       });
     } catch (err) {
       console.log(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
     }
   }
 
   async function handleMoveToWishlist({ productId }) {
-    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+
     try {
       handleAddToWishlist({ productId, showToast: false });
       handleRemoveFromCart({ productId, showToast: false });
@@ -245,9 +233,7 @@ export function CartProvider({ children }) {
       });
     } catch (err) {
       console.error(err);
-    } finally {
-      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
-    }
+    } 
   }
 
   async function handleIncrementQuantity({ productId }) {

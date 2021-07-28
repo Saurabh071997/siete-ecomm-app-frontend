@@ -1,6 +1,7 @@
 import "./LoginPage.css";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useAuth } from "../context/AuthProvider";
 
 export const ShowErrorMessage = ({ message }) => {
@@ -27,7 +28,32 @@ export function SignupPage() {
     passwordLengthError: "passwordLengthError",
   };
 
-  const { handleUserSignUp } = useAuth();
+  const {
+    authState: { authLoader },
+    handleUserSignUp,
+  } = useAuth();
+
+  const handleSignUp = () => {
+    let regex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!regex.test(email)) {
+      setError(errorTypes.emailFormatError);
+    } else if (!password || !confirmPassword) {
+      setError(errorTypes.emptyPasswordError);
+    } else if (password !== confirmPassword) {
+      setError(errorTypes.passwordMismatchError);
+    } else if (
+      password &&
+      password.length < 8 &&
+      confirmPassword &&
+      confirmPassword.length < 8
+    ) {
+      setError(errorTypes.passwordLengthError);
+    } else {
+      //   console.log("user signup proceeds");
+      handleUserSignUp(email, password);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +70,7 @@ export function SignupPage() {
               type="text"
               placeholder=" "
               onChange={(e) => {
-                setEmail(e.target.value);
+                setEmail(e.target.value.trim());
                 setError(false);
               }}
             ></input>
@@ -60,7 +86,7 @@ export function SignupPage() {
               type="password"
               placeholder=" "
               onChange={(e) => {
-                setPassword(e.target.value);
+                setPassword(e.target.value.trim());
                 setError(false);
               }}
             ></input>
@@ -73,7 +99,7 @@ export function SignupPage() {
               type="password"
               placeholder=" "
               onChange={(e) => {
-                setConfirmPassword(e.target.value);
+                setConfirmPassword(e.target.value.trim());
                 setError(false);
               }}
             ></input>
@@ -93,6 +119,24 @@ export function SignupPage() {
           )}
 
           <div className="align-center">
+            <button
+              type="button"
+              className={authLoader ? "btn-login btn-disabled" : "btn-login"}
+              onClick={handleSignUp}
+            >
+              {authLoader ? (
+                <CircularProgress
+                  style={{
+                    color: "whitesmoke",
+                    height: "1.5rem",
+                    width: "1.5rem",
+                  }}
+                />
+              ) : (
+                "Sign up"
+              )}
+            </button>
+
             <div className="page-nav-txt">
               Already a User?
               <Link to="/login" style={{ textDecoration: "none" }}>
@@ -100,34 +144,6 @@ export function SignupPage() {
                 <span className="page-nav-link">Login </span>{" "}
               </Link>
             </div>
-
-            <button
-              type="button"
-              className="btn-login"
-              onClick={() => {
-                let regex =
-                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                if (!regex.test(email)) {
-                  setError(errorTypes.emailFormatError);
-                } else if (!password || !confirmPassword) {
-                  setError(errorTypes.emptyPasswordError);
-                } else if (password !== confirmPassword) {
-                  setError(errorTypes.passwordMismatchError);
-                } else if (
-                  password &&
-                  password.length < 8 &&
-                  confirmPassword &&
-                  confirmPassword.length < 8
-                ) {
-                  setError(errorTypes.passwordLengthError);
-                } else {
-                  //   console.log("user signup proceeds");
-                  handleUserSignUp(email, password);
-                }
-              }}
-            >
-              Sign Up
-            </button>
           </div>
         </div>
       </div>
