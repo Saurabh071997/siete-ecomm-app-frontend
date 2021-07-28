@@ -7,7 +7,7 @@ import { useCart } from "../context/CartProvider";
 export function ShowProductsInDesktop() {
   const {
     state: { sortBy, showNewOnly, showDiscountOnly, categoryList },
-    dispatch
+    dispatch,
   } = useCart();
 
   const navigate = useNavigate();
@@ -22,8 +22,7 @@ export function ShowProductsInDesktop() {
               <li
                 key={_id}
                 onClick={() => {
-                  // dispatch({ TYPE: ACTIONS.SELECT_CATEGORY, payload: { _id } });
-                  navigate(`/products/${_id}`)
+                  navigate(`/products/${_id}`);
                 }}
               >
                 <div className="sidenav-item">{name}</div>
@@ -35,7 +34,7 @@ export function ShowProductsInDesktop() {
               style={{
                 color: "#dc2626",
                 padding: "0.25rem 0rem 0.25rem 1rem",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
             >
               view more ...
@@ -55,7 +54,7 @@ export function ShowProductsInDesktop() {
                 onChange={() =>
                   dispatch({
                     TYPE: ACTIONS.SORT,
-                    payload: "PRICE_HIGH_TO_LOW"
+                    payload: "PRICE_HIGH_TO_LOW",
                   })
                 }
                 checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
@@ -73,7 +72,7 @@ export function ShowProductsInDesktop() {
                 onChange={() =>
                   dispatch({
                     TYPE: ACTIONS.SORT,
-                    payload: "PRICE_LOW_TO_HIGH"
+                    payload: "PRICE_LOW_TO_HIGH",
                   })
                 }
                 checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
@@ -110,6 +109,13 @@ export function ShowProductsInDesktop() {
             </div>
           </li>
         </ul>
+
+        <button
+          className="btn-clear"
+          onClick={() => dispatch({ TYPE: ACTIONS.CLEAR_FILTERS })}
+        >
+          clear filters
+        </button>
       </div>
 
       <div className="body-content">

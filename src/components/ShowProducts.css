@@ -46,3 +46,12 @@ li {
 .sidenav-item:hover {
   cursor: pointer;
 }
+
+.btn-clear{
+  border:none;
+  outline:none;
+  background-color: #3B82F6;
+  color:whitesmoke;
+  padding:0.25rem;
+  font-size: 1.15rem;
+}
