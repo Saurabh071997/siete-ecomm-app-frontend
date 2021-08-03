@@ -211,8 +211,8 @@ export function CartProvider({ children }) {
   async function handleMoveToCart({ productId }) {
 
     try {
-      handleAddToCart({ productId, showToast: false });
-      handleRemoveFromWishlist({ productId, showToast: false });
+      await handleAddToCart({ productId, showToast: false });
+      await handleRemoveFromWishlist({ productId, showToast: false });
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Cart " },
@@ -225,8 +225,8 @@ export function CartProvider({ children }) {
   async function handleMoveToWishlist({ productId }) {
 
     try {
-      handleAddToWishlist({ productId, showToast: false });
-      handleRemoveFromCart({ productId, showToast: false });
+      await handleAddToWishlist({ productId, showToast: false });
+      await handleRemoveFromCart({ productId, showToast: false });
       toastDispatch({
         TYPE: "TOGGLE_TOAST",
         payload: { toggle: true, message: "Moved to Wishlist " },

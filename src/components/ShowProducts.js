@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-// import { useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { useCart } from "../context/CartProvider";
+import empty from '../images/empty.jpg';
 
 export function ShowProducts() {
   const {
@@ -55,11 +55,17 @@ export function ShowProducts() {
     showDiscountOnly,
   });
 
-  return (
+  return (filteredData?.length > 0 ?
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {filteredData.map((productItem, idx) => {
         return <ProductCard key={productItem._id} product={productItem} />;
       })}
-    </div>
+    </div> : <>
+      <div className="page-layout" >
+        <div className="empty-container">
+          <img src= {empty} alt="empty-products" className="empty-img"/>
+        </div>
+      </div>
+    </>
   );
 }

@@ -41,7 +41,7 @@ function App() {
           bodyClassName: "toast-body",
           closeButton: false,
         });
-      }, 1000);
+      }, 500);
     }
 
     toastActive && notify();
