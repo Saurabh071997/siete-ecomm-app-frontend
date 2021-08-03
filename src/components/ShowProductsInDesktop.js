@@ -57,7 +57,7 @@ export function ShowProductsInDesktop() {
                     payload: "PRICE_HIGH_TO_LOW",
                   })
                 }
-                checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
+                checked={ sortBy === "PRICE_HIGH_TO_LOW"}
               ></input>{" "}
               <span className="label-radio">Price (High To Low)</span>
             </div>
@@ -75,7 +75,7 @@ export function ShowProductsInDesktop() {
                     payload: "PRICE_LOW_TO_HIGH",
                   })
                 }
-                checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
+                checked={sortBy === "PRICE_LOW_TO_HIGH"}
               ></input>{" "}
               <span className="label-radio">Price (Low To High) </span>
             </div>

@@ -16,14 +16,15 @@ export function ShowProducts() {
   let { categoryId: selectedCategory, subcategoryId: selectedSubCategory } =
     useParams();
 
-  function getSortedData(productData, sortBy) {
-    if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {
+  function getSortedData(itemList, sortBy) {
+    let productData = [...itemList]
+    if (sortBy === "PRICE_HIGH_TO_LOW") {
       return productData.sort(
         (a, b) => b["effectivePrice"] - a["effectivePrice"]
       );
     }
 
-    if (sortBy && sortBy === "PRICE_LOW_TO_HIGH") {
+    if (sortBy === "PRICE_LOW_TO_HIGH") {
       return productData.sort(
         (a, b) => a["effectivePrice"] - b["effectivePrice"]
       );

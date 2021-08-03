@@ -82,7 +82,7 @@ export function ProductOperations() {
             onChange={() =>
               dispatch({ TYPE: ACTIONS.SORT, payload: "PRICE_HIGH_TO_LOW" })
             }
-            checked={sortBy && sortBy === "PRICE_HIGH_TO_LOW"}
+            checked={sortBy === "PRICE_HIGH_TO_LOW"}
           ></input>{" "}
           <label className="radio-label">Price (High To Low)</label>
         </div>
@@ -96,7 +96,7 @@ export function ProductOperations() {
             onChange={() =>
               dispatch({ TYPE: ACTIONS.SORT, payload: "PRICE_LOW_TO_HIGH" })
             }
-            checked={sortBy && sortBy === "PRICE_LOW_TO_HIGH"}
+            checked={sortBy === "PRICE_LOW_TO_HIGH"}
           ></input>{" "}
           <label className="radio-label">Price (Low To High)</label>
         </div>
