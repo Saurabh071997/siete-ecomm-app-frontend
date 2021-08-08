@@ -1,2 +1,2 @@
-export const API_URL = `https://siete-backend.herokuapp.com`
+export const API_URL = `https://siete-app.herokuapp.com`
 
