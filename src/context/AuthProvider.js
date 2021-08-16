@@ -107,7 +107,6 @@ export function AuthProvider({ children }) {
         });
       } else {
         console.error(err);
-        // navigate('/error');
       }
     }finally{
       setAuthState(authState => ({...authState, authLoader:false}))
@@ -145,8 +144,6 @@ export function AuthProvider({ children }) {
         navigate("/");
       }
     } catch (err) {
-      // console.log("in signup catch")
-      console.log(err?.response);
       if (err?.response?.status === 409) {
         toastDispatch({
           TYPE: "TOGGLE_TOAST",
@@ -154,7 +151,6 @@ export function AuthProvider({ children }) {
         });
       } else {
         console.error(err);
-        // navigate('/error');
       }
     }finally{
       setAuthState(authState => ({...authState, authLoader:false}))
@@ -174,9 +170,7 @@ export function AuthProvider({ children }) {
         setAuthState((authState) => ({ ...authState, currentUser: data }));
       }
     } catch (err) {
-      // handleError(err)
-      console.log("now in catch");
-      console.log(err?.response);
+      console.error(err)
     }
   }
 
@@ -199,15 +193,12 @@ export function AuthProvider({ children }) {
         navigate("/profile");
       }
     } catch (err) {
-      // handleError(err);
-      // console.log("now in catch")
       console.error(err);
     }
   }
 
   async function getUserAddressDetails() {
     try {
-      console.log("address detail called")
       let response = await axios.get(
         `${API_URL}/address/users`
       );

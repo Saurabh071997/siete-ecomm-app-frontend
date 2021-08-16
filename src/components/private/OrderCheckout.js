@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./OrderCheckout.css";
 import { useAuth } from "../../context/AuthProvider";
 import { useCart } from "../../context/CartProvider";
 import cod from "../../images/cash.svg";
+import StripeCheckout from "react-stripe-checkout";
+import { Loader } from "../Loader";
 
 export function OrderCheckout() {
   const {
     authState: { currentUser, userAddressList },
     getUserDetails,
-    getUserAddressDetails
+    getUserAddressDetails,
   } = useAuth();
 
   const {
-    state: { itemsInCart, productList },
+    state: { itemsInCart, productList, isLoading },
     getUserCart,
-    handleOrderConfirm
+    handleOrderConfirm,
+    handleCardPayment,
   } = useCart();
 
   const [orderState, setOrderState] = useState({
@@ -25,7 +28,7 @@ export function OrderCheckout() {
     paymentSelected: false,
   });
 
-  // const [showModal, setShowModal] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
 
   const navigate = useNavigate();
 
@@ -61,9 +64,18 @@ export function OrderCheckout() {
     !currentUser?.contact ||
     !displayAddress;
 
-  return (
+  const makePayment = (token) => {
+    const cart = {
+      total: totalAmount,
+    };
+
+    handleCardPayment(token, cart);
+  };
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="page-section">
-      {/* {showModal && <OrderModal />} */}
       <div className="component-head">Order Confirmation</div>
 
       <div
@@ -162,12 +174,11 @@ export function OrderCheckout() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  width: "60%"
+                  width: "60%",
                 }}
               >
                 <div className="user-info">
-                  {currentUser?.firstname ? currentUser?.firstname : "--"}
-                  {" "}
+                  {currentUser?.firstname ? currentUser?.firstname : "--"}{" "}
                   {currentUser?.lastname ? currentUser?.lastname : "--"}
                 </div>
                 <div className="address-info">
@@ -200,7 +211,7 @@ export function OrderCheckout() {
                   flexDirection: "column",
                   padding: "0.25rem",
                   width: "40%",
-                  position: "relative"
+                  position: "relative",
                 }}
               >
                 {(!currentUser?.firstname ||
@@ -267,63 +278,122 @@ export function OrderCheckout() {
               ? "page-section-container"
               : "page-section-container-disabled"
           }
-
-          style={{minHeight:"20vh"}}
+          style={{ minHeight: "20vh" }}
         >
           <div className="page-section-container-head">
             Confirm Payment Method
           </div>
-          <div className="page-section-container-content">
-              <div style={{display:"inline-block" }} >
-            <div
-              className={orderState?.paymentSelected ? "order-payment-active" : "order-payment"}
-              onClick={() => {
-                setOrderState((orderState) => ({
-                  ...orderState,
-                  paymentSelected: true,
-                }));
-              }}
-            >
-              <img src={cod} className="order-payment-img" alt="img" />
-              <div className="order-payment-txt">Cash On Delivery</div>
+          <div
+            className="page-section-container-content"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <div style={{ display: "inline-block" }}>
+              <div
+                className={
+                  orderState?.paymentSelected && paymentMethod === "COD"
+                    ? "order-payment-active"
+                    : "order-payment"
+                }
+                onClick={() => {
+                  setOrderState((orderState) => ({
+                    ...orderState,
+                    paymentSelected: true,
+                    paymentConfirm: false
+                  }));
+                  setPaymentMethod("COD");
+                }}
+              >
+                <img src={cod} className="order-payment-img" alt="img" />
+                <div className="order-payment-txt">Cash On Delivery</div>
+              </div>
             </div>
+
+            <div style={{ display: "inline-block" }}>
+              <div
+                className={
+                  orderState?.paymentSelected && paymentMethod === "CARD"
+                    ? "order-payment-active"
+                    : "order-payment"
+                }
+                onClick={() => {
+                  setOrderState((orderState) => ({
+                    ...orderState,
+                    paymentSelected: true,
+                    paymentConfirm: false
+                  }));
+                  setPaymentMethod("CARD");
+                }}
+              >
+                <img
+                  src="https://img.icons8.com/ios-filled/50/000000/card-in-use.png"
+                  className="order-payment-img"
+                  alt="img"
+                />
+                <div className="order-payment-txt">Credit Card</div>
+              </div>
             </div>
           </div>
 
-          <button
-            disabled={!orderState?.paymentSelected}
-            className={
-              orderState?.paymentSelected
-                ? "btn-confirm btn-pay-confirm"
-                : "btn-confirm btn-pay-confirm btn-disabled"
-            }
-            onClick={() => {
-              setOrderState((orderState) => ({
-                ...orderState,
-                paymentConfirm: true,
-              }));
-            }}
-          >
-            Confirm
-          </button>
-        </div>
-        
-        <div className="place-order">
-        <button
-          disabled={!orderState?.paymentConfirm}
-          className={
-            orderState?.paymentConfirm
-              ? "btn-place-order"
-              : "btn-place-order btn-disabled"
-          }
-          onClick={() => {
-            handleOrderConfirm()
-          }}
-        >
-          Place Order
-        </button>
+          <div className="pay-confirm-div">
+            <button
+              disabled={!orderState?.paymentSelected}
+              className={
+                orderState?.paymentSelected
+                  ? "btn-confirm btn-pay-confirm"
+                  : "btn-confirm btn-pay-confirm btn-disabled"
+              }
+              onClick={() => {
+                setOrderState((orderState) => ({
+                  ...orderState,
+                  paymentConfirm: true,
+                }));
+              }}
+            >
+              Confirm
+            </button>
+          </div>
         </div>
 
+        <div className="place-order">
+          {paymentMethod === "COD" && orderState?.paymentConfirm ? (
+            <button
+              disabled={!orderState?.paymentConfirm}
+              className={
+                orderState?.paymentConfirm
+                  ? "btn-place-order"
+                  : "btn-place-order btn-disabled"
+              }
+              onClick={() => {
+                handleOrderConfirm();
+              }}
+            >
+              Place Order
+            </button>
+          ) : paymentMethod === "CARD" && orderState?.paymentConfirm ? (
+            <>
+              <StripeCheckout
+                stripeKey={process.env.REACT_APP_STRIPE_KEY}
+                token={makePayment}
+                amount={totalAmount * 100}
+                currency="INR"
+                name="Siete"
+              >
+                <button
+                  disabled={!orderState?.paymentConfirm}
+                  className={
+                    orderState?.paymentConfirm
+                      ? "btn-place-order"
+                      : "btn-place-order btn-disabled"
+                  }
+                >
+                  Place Order
+                </button>
+              </StripeCheckout>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

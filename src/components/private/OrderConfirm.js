@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "./OrderConfirm.css";
 import img_confirm from "../../images/green_check.svg";
 import { useCart } from "../../context/CartProvider";
@@ -7,6 +8,11 @@ import { Loader } from "../Loader";
 export function OrderConfirm() {
   const navigate = useNavigate();
   const { isLoading } = useCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return isLoading ? (
     <Loader />
   ) : (

@@ -287,6 +287,27 @@ export function CartProvider({ children }) {
     }
   }
 
+  async function handleCardPayment(token, cart){
+    console.log("now call loader")
+    dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: true } });
+    try{
+      const response = await axios.post(`${API_URL}/payment`,{
+        token,
+        cart
+      })
+
+      if(response.status === 200){
+        dispatch({ TYPE: ACTIONS.ORDER_CONFIRM });
+        navigate('/orderconfirm')
+      }
+    }catch(err){
+      console.error(err)
+    }finally{
+      console.log("now stop loader")
+      dispatch({ TYPE: ACTIONS.TOGGLE_LOADER, payload: { toggle: false } });
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -302,7 +323,8 @@ export function CartProvider({ children }) {
         handleMoveToWishlist,
         handleIncrementQuantity,
         handleDecrementQuantity,
-        handleOrderConfirm
+        handleOrderConfirm,
+        handleCardPayment
       }}
     >
       {children}
