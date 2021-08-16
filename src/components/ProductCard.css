@@ -1,0 +1,79 @@
+.card-show-block{
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  overflow: hidden;
+  padding-bottom: 1rem;
+  box-shadow: 2px 2px 4px var(--truegray400);
+}
+
+.card-block-detail-title {
+  font-size: var(--txt-15);
+  margin: 0rem;
+}
+
+.card-block-detail-txt {
+  font-size: var(--txt-115);
+  margin: 0rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-block-detail-info {
+  font-size: var(--txt-125);
+  margin: 0rem;
+}
+
+.card-bottom {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.card-btn {
+  border: none;
+  outline: none;
+  width: 49%;
+  background: transparent;
+  padding: 0.25rem;
+  font-size: var(--txt-1);
+  border: 1px solid var(--bg-footer);
+  cursor: pointer;
+  color: var(--truegray100);
+}
+
+.card-block-btn-margin {
+  margin: 0.5rem 0.5rem 0.5rem 0rem;
+  align-self: flex-start;
+}
+
+.card-block-btn-style {
+  border: none;
+  outline: none;
+}
+
+.mob-flex-align {
+  flex: 0 1 220px;
+  margin: 0.5rem 0.25rem;
+}
+
+@media screen and (max-width: 600px) {
+  .mob-flex-align {
+    /* width: 50%; */
+    flex: 0 1 48%;
+    margin: 0.25rem 0.1rem;
+  }
+
+  .card-block-badge-tilt {
+    font-size: 1.25rem;
+    width: 80%;
+  }
+
+  .card-block-btn-style {
+    font-size: 0.85rem;
+  }
+
+  .tilt-position{
+    right:-1.5em
+  }
+}

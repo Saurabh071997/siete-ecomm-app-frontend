@@ -1,0 +1,119 @@
+.address-block{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0rem auto;
+}
+
+.address-head{
+    font-size: var(--txt-25);
+    color: #0284C7;
+}
+
+.address-action{
+    margin:1.5rem auto;
+    display: flex;
+    cursor: pointer;
+    padding:0.25rem 1rem;
+    background-color: var(--truegray100);
+}
+
+.address-add-img{
+    height:2.25rem;
+    width:2.25rem;
+    margin-right: 1rem;
+    align-self: center;
+    padding:0.25rem;
+    background-color: var(--truegray300);
+}
+
+.address-add-txt{
+    font-size: var(--txt-15);
+    padding:0.5rem 0rem;
+    align-self: center;
+}
+
+.address-content{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
+    border-top: 1px solid #0284C7;
+}
+
+.address-content-head{
+    font-size: var(--txt-125);
+    margin-bottom:1rem;
+    position: relative;
+    top: -0.85em;
+    padding: 0rem 0.5rem;   
+}
+
+.address-content-head button{
+    border: none;
+    outline: none;
+    pointer-events: none;
+    background-color: white;
+}
+
+.address-item{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.address-item-detail{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position:relative;
+    padding: 0.5rem;
+    border: 1px solid #7DD3FC;
+    border-bottom: none;
+    border-top-left-radius: 0.35rem;
+    border-top-right-radius: 0.35rem;
+}
+
+.address-item:hover{
+    transform: translateY(-5px);
+}
+
+.address-item:hover .address-item-detail{
+    /* border-color: #F59E0B; */
+    background-color: #F0F9FF;
+}
+
+.address-txt{
+    font-size: var(--txt-125);
+}
+
+.txt-sep{
+    margin-right: 0.5rem;
+}
+
+.icon-select{
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.address-default{
+    position: absolute;
+    top:1em;
+    right:0.5em;
+}
+
+.address-item-btn{
+    width:100%;
+}
+
+.address-item-btn button{
+    font-size: var(--txt-115);
+    color: var(--truegray50);
+    background-color: var(--truegray700);
+    padding:0.25rem 0rem;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: center;
+}
+

@@ -1,0 +1,30 @@
+.address-container{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: 2rem;
+}
+
+.from-width{
+    min-width:70%;
+    max-width: 80%;
+}
+
+.width-full{
+    width:100%
+}
+
+.margin-1{
+    margin:2rem 0rem;
+}
+
+.floating-label textarea{
+    height:100px;
+}
+
+@media screen and (max-width:600px){
+    .from-width{
+        min-width: 80%;
+        max-width: 90%;
+    }
+}

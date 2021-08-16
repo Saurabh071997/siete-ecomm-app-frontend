@@ -1,0 +1,21 @@
+.label-focus {
+  top: -10px;
+  margin-left: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+}
+
+.w250{
+  min-width:250px;
+  max-width: 350px;
+}
+
+.btn-save{
+  width:250px;
+}
+

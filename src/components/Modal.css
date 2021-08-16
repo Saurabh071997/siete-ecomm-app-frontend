@@ -1,0 +1,33 @@
+.modal-div {
+  width: 100%;
+  position: fixed;
+  padding: 0rem;
+  top: 50%;
+  left: 0em;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  margin: 0rem auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.modal-sub-div {
+  position: relative;
+  text-align: center;
+  margin: 0rem auto;
+  padding: 1.15rem;
+  background-color: #e5e7eb;
+  box-shadow: 0px 0px 20px var(--truegray600);
+  border-radius: 0.35rem;
+}
+
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+}

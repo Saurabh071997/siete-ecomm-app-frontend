@@ -1,0 +1,127 @@
+.h-carousel {
+  height: 85vh;
+}
+
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 70%;
+  margin: 0.5rem auto;
+}
+
+.home-banner-img {
+  width: 100%;
+  height: 75vh;
+}
+
+.home-banner-txt {
+  position: absolute;
+  bottom: 1em;
+  font-size: 7rem;
+  color: white;
+  line-height: 1.05;
+  opacity: 0.8;
+  flex-shrink: 1;
+}
+
+.txt-left {
+  right: 1em;
+}
+
+.block-sub-head {
+  font-size: 2rem;
+}
+
+.block-categories {
+  width: 50%;
+  margin: 1rem auto;
+  position: relative;
+}
+
+.txt-view {
+  color: var(--colorLogo);
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.block-cat {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto;
+  justify-content: space-between;
+}
+
+.block-cat-item {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  outline: none;
+  margin: 0.5rem;
+}
+
+.block-cat-item:hover {
+  cursor: pointer;
+}
+
+.cat-img {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  margin: 0rem auto;
+}
+
+.block-cat-detail {
+  margin: 0.25rem auto;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .h-carousel {
+    height: 200px;
+  }
+
+  .home-banner {
+    width: 95%;
+  }
+
+  .home-banner-img {
+    width: 100%;
+    height: 30vh;
+  }
+  .home-banner-txt {
+    position: absolute;
+    top: 0.75em;
+    font-size: 2.5rem;
+    color: white;
+    line-height: 1.05;
+    opacity: 0.8;
+  }
+
+  .txt-left {
+    right: 0.45em;
+    width: 28%;
+  }
+
+  .block-sub-head {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .block-categories {
+    width: 100%;
+    margin: 1rem auto;
+  }
+
+  .block-cat-item {
+    margin: 0.5rem 0rem;
+    width: 50%;
+    flex: 0 1 50%;
+  }
+
+  .cat-img {
+    width: 6rem;
+    height: 6rem;
+  }
+}

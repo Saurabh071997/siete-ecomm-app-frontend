@@ -1,38 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
+:root {
+  --colorLogo: #dc2626;
+  --bg-nav: #e5e5e5;
+  --bg-footer: #d4d4d4;
+  --txt-dark: #171717;
+  --txt-225: 2.25rem;
+  /*  */
+  --borderRight: #e4e4e7;
+  --borderTop: #d4d4d8;
+  --navBg: white;
+  --btnLabel: #18181b;
+}
+
+body {
+  padding: 0rem;
+  margin: 0rem;
+}
+
 .App {
+  font-family: "Oswald", sans-serif;
+  padding: 0rem;
+}
+
+.align-center {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.toast-class {
+  width: 90%;
+  margin-top: 1rem;
+  background-color: #404040;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.toast-body {
+  background-color: #404040;
+  color: #fafafa;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.page-head {
+  font-size: var(--txt-225);
+  padding: 1rem;
+}
+
+.page-layout {
+  width: 70%;
+  margin: 0rem auto;
+}
+
+.page-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.component-head {
+  font-size: var(--txt-225);
+  color: var(--txt-light-secondary);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.empty-container {
+  font-size: 2rem;
+  opacity: 0.6;
+  margin: 0rem auto;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-empty {
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  color: var(--truegray800);
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+@media screen and (max-width: 600px) {
+  .page-head {
+    font-size: var(--txt-175);
   }
-  to {
-    transform: rotate(360deg);
+
+  .page-layout {
+    width: auto;
+  }
+
+  .page-container {
+    padding: 0rem;
+    margin: 0rem;
+  }
+
+  .empty-img{
+    height:300px;
   }
 }

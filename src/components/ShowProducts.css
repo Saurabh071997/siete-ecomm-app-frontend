@@ -1,0 +1,57 @@
+.body-container {
+  display: flex;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  margin: 1rem 0rem;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  padding: 0.25rem 2rem 0.25rem 1rem;
+  border-right: 3px solid var(--borderRight);
+}
+
+ul {
+  list-style: none;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--borderRight);
+}
+
+li {
+  font-size: 1.15rem;
+}
+
+.sidenav-head {
+  font-size: 1.75rem;
+}
+
+.body-content {
+  padding: 0.25rem 1rem;
+  max-width: 75%;
+  margin: 0rem 2rem;
+}
+
+.btn-radio,
+.btn-checkbox {
+  margin-right: 0.25rem;
+}
+
+.sidenav-item {
+  font-size: 1.25rem;
+  padding: 0.25rem 0rem 0.25rem 1rem;
+}
+
+.sidenav-item:hover {
+  cursor: pointer;
+}
+
+.btn-clear{
+  border:none;
+  outline:none;
+  background-color: #3B82F6;
+  color:whitesmoke;
+  padding:0.25rem;
+  font-size: 1.15rem;
+}

@@ -1,0 +1,48 @@
+.footer {
+  margin: 0rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.5rem;
+  background-color: var(--bg-footer);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem auto;
+  width: 30%;
+}
+
+.footer-content-head {
+  font-size: 1.25rem;
+  margin: 0rem auto;
+}
+.footer-content-txt {
+  font-size: 1.1rem;
+  margin: 0rem auto;
+}
+
+.footer-social-link-bar {
+  width: 75%;
+  margin: 0.5rem auto;
+}
+
+.footer-app-name {
+  font-size: 1.5rem;
+  color: var(--colorLogo);
+  margin: 0rem auto;
+}
+
+.footer-company-name {
+  font-size: 2rem;
+  color: var(--colorLogo);
+  font-weight: bold;
+  margin: 0rem auto;
+}
+
+@media screen and (max-width:600px){    
+  .footer-content {
+    width: 85%;
+  }
+
+}
